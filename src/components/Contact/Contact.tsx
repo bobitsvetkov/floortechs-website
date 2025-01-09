@@ -151,7 +151,7 @@ const Contact = () => {
                 { action: 'submit' }
             );
             console.log('reCAPTCHA token:', token);
-            const backendServer = import.meta.env.BACKEND_SERVER;
+            const backendServer = import.meta.env.VITE_BACKEND_SERVER;
             if (!backendServer) {
                 throw new Error('Backend server URL is not defined');
             }
