@@ -11,8 +11,8 @@ import Footer from './components/Footer/Footer';
 
 console.log(import.meta.env);
 console.log(import.meta.env.VITE_GOOGLE_MAPS_KEY);
-console.log(process.env.VITE_GOOGLE_MAPS_KEY);
-const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string || process.env.VITE_GOOGLE_MAPS_API_KEY as string;
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
+console.log(GOOGLE_MAPS_API_KEY)
 const GOOGLE_MAPS_LIBRARIES: Libraries = ['places', 'drawing', 'geometry', 'visualization'];
 
 const App = () => {
