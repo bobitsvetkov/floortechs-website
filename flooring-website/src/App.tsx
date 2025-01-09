@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import Navigation from './components/Navigation/Navigation';
+import Home from './components/Home/Home';
+import Solutions from './components/Solution/Solution';
+import Work from './components/Work/Work';
+import Installation from './components/Installation/Installation';
+import Contact from './components/Contact/Contact';
+import { LoadScript, Libraries } from '@react-google-maps/api';
+import Footer from './components/Footer/Footer';
 
-function App() {
-  const [count, setCount] = useState(0)
+const GOOGLE_MAPS_API_KEY = 'AIzaSyC40U34KNZnVpAWVJ0GHRjnjxi5u_EZ9lo';
+const GOOGLE_MAPS_LIBRARIES: Libraries = ['places', 'drawing', 'geometry', 'visualization'];
+
+const App = () => {
+  const [currentPage, setCurrentPage] = useState<string>('home');
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={GOOGLE_MAPS_LIBRARIES}>
+    <Router>
+      <div id='root' className="min-h-screen bg-black text-white">
+        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <div className="w-full min-h-screen">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/installation" element={<Installation />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </Router>
+    </LoadScript>
+  );
+};
 
-export default App
+
+export default App;
