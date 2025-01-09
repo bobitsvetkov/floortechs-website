@@ -4,14 +4,6 @@ import { GoogleMap, InfoWindow } from '@react-google-maps/api';
 import { useState, useEffect, useCallback, memo } from 'react';
 import emailjs from '@emailjs/browser';
 
-// Types
-interface FormData {
-    name: string;
-    email: string;
-    phone: string;
-    message: string;
-}
-
 interface ContactInfo {
     icon: JSX.Element;
     text: string;
@@ -112,10 +104,11 @@ const MapComponent = memo(() => {
 });
 
 const Contact = () => {
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState({
         name: '',
         email: '',
         phone: '',
+        subject: '',
         message: ''
     });
     const [isSending, setIsSending] = useState(false);
@@ -151,14 +144,14 @@ const Contact = () => {
             if (!window.grecaptcha) {
                 throw new Error('reCAPTCHA not loaded');
             }
-            console.log("recaptcha site key", import.meta.env.VITE_RECAPTCHA_SITE_KEY)
+            console.log("recaptcha site key", import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY)
 
             const token = await window.grecaptcha.execute(
-                import.meta.env.VITE_RECAPTCHA_SITE_KEY,
+                import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY,
                 { action: 'submit' }
             );
             console.log('reCAPTCHA token:', token);
-            const verificationResponse = await fetch(import.meta.env.VITE_VERIFICATION_ENDPOINT, {
+            const verificationResponse = await fetch('https://portfolio-backend-server.azurewebsites.net/verify-captcha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })
@@ -175,10 +168,10 @@ const Contact = () => {
             }
 
             await emailjs.send(
-                import.meta.env.VITE_EMAIL_JS_SERVICE_KEY,
-                import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY,
+                import.meta.env.VITE_EMAIL_JS_SERVICE_KEY || process.env.EMAIL_JS_SERVICE_KEY,
+                import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY || process.env.EMAIL_JS_TEMPLATE_KEY,
                 formData,
-                import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY
+                import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY || process.env.EMAIL_JS_PUBLIC_KEY
             );
 
             setStatus({ success: 'Message sent successfully!' });
@@ -221,7 +214,7 @@ const Contact = () => {
                                         <input
                                             type={field.type}
                                             name={field.name}
-                                            value={formData[field.name as keyof FormData]}
+                                            value={formData.subject}
                                             onChange={handleChange}
                                             className="w-full px-4 py-3 bg-amber-100/5 border border-amber-100/10 rounded-lg
                                             text-amber-100 placeholder-amber-100/30 focus:border-amber-200/50 focus:ring-2
