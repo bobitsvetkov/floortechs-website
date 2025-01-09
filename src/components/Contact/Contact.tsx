@@ -144,14 +144,14 @@ const Contact = () => {
             if (!window.grecaptcha) {
                 throw new Error('reCAPTCHA not loaded');
             }
-            console.log("recaptcha site key", import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY)
+            console.log("recaptcha site key", import.meta.env.VITE_RECAPTCHA_SITE_KEY)
 
             const token = await window.grecaptcha.execute(
                 import.meta.env.VITE_RECAPTCHA_SITE_KEY,
                 { action: 'submit' }
             );
             console.log('reCAPTCHA token:', token);
-            const backendServer = process.env.BACKEND_SERVER;
+            const backendServer = import.meta.env.BACKEND_SERVER;
             if (!backendServer) {
                 throw new Error('Backend server URL is not defined');
             }
@@ -172,10 +172,10 @@ const Contact = () => {
             }
 
             await emailjs.send(
-                import.meta.env.VITE_EMAIL_JS_SERVICE_KEY || process.env.EMAIL_JS_SERVICE_KEY,
-                import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY || process.env.EMAIL_JS_TEMPLATE_KEY,
+                import.meta.env.VITE_EMAIL_JS_SERVICE_KEY,
+                import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY,
                 formData,
-                import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY || process.env.EMAIL_JS_PUBLIC_KEY
+                import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY
             );
 
             setStatus({ success: 'Message sent successfully!' });
