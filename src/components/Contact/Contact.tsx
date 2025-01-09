@@ -218,7 +218,7 @@ const Contact = () => {
                                         <input
                                             type={field.type}
                                             name={field.name}
-                                            value={formData.subject}
+                                            value= {formData[field.name as keyof typeof formData]}
                                             onChange={handleChange}
                                             className="w-full px-4 py-3 bg-amber-100/5 border border-amber-100/10 rounded-lg
                                             text-amber-100 placeholder-amber-100/30 focus:border-amber-200/50 focus:ring-2
