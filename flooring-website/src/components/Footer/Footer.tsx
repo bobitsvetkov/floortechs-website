@@ -13,12 +13,12 @@ const Footer = () => {
         { to: '/contact', label: 'Contact' }
     ];
 
-    const services = [
-        { to: '/residential', label: 'Residential' },
-        { to: '/commercial', label: 'Commercial' },
-        { to: '/consultation', label: 'Consultation' },
-        { to: '/maintenance', label: 'Maintenance' }
-    ];
+    // const services = [
+    //     { to: '/residential', label: 'Residential' },
+    //     { to: '/commercial', label: 'Commercial' },
+    //     { to: '/consultation', label: 'Consultation' },
+    //     { to: '/maintenance', label: 'Maintenance' }
+    // ];
 
     const socialLinks = [
         { Icon: BsFacebook, href: '#' },

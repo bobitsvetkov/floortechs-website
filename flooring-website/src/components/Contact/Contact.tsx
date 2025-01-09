@@ -175,7 +175,7 @@ const Contact = () => {
             );
 
             setStatus({ success: 'Message sent successfully!' });
-            setFormData({ name: '', email: '', phone: '', message: '' });
+            setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
         } catch (error) {
             setStatus({ error: (error as Error).message || 'Failed to send message' });
             console.error('Form submission error:', error);
