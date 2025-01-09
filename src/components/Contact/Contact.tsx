@@ -147,7 +147,7 @@ const Contact = () => {
             console.log("recaptcha site key", import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY)
 
             const token = await window.grecaptcha.execute(
-                import.meta.env.VITE_RECAPTCHA_SITE_KEY || process.env.RECAPTCHA_SITE_KEY,
+                import.meta.env.VITE_RECAPTCHA_SITE_KEY,
                 { action: 'submit' }
             );
             console.log('reCAPTCHA token:', token);
