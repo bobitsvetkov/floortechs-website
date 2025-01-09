@@ -151,7 +151,11 @@ const Contact = () => {
                 { action: 'submit' }
             );
             console.log('reCAPTCHA token:', token);
-            const verificationResponse = await fetch('https://portfolio-backend-server.azurewebsites.net/verify-captcha', {
+            const backendServer = process.env.BACKEND_SERVER;
+            if (!backendServer) {
+                throw new Error('Backend server URL is not defined');
+            }
+            const verificationResponse = await fetch(backendServer, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })
