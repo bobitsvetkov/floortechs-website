@@ -75,7 +75,7 @@ const MapComponent = memo(() => {
             };
             loadMarker();
         }
-    }, [map]);
+    }, [map, marker]);
 
     return (
         <GoogleMap

@@ -1,4 +1,3 @@
-// src/App.tsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import Navigation from './components/Navigation/Navigation';
@@ -10,7 +9,7 @@ import Contact from './components/Contact/Contact';
 import { LoadScript, Libraries } from '@react-google-maps/api';
 import Footer from './components/Footer/Footer';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyC40U34KNZnVpAWVJ0GHRjnjxi5u_EZ9lo';
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string;
 const GOOGLE_MAPS_LIBRARIES: Libraries = ['places', 'drawing', 'geometry', 'visualization'];
 
 const App = () => {
