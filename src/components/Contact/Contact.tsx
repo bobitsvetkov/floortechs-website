@@ -10,6 +10,10 @@ interface ContactInfo {
     text: string;
 }
 
+interface ContactProps {
+    credentials: Credentials;
+}
+
 declare global {
     interface Window {
         grecaptcha: {
@@ -38,7 +42,7 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
     </motion.div>
 ));
 
-const Contact = () => {
+const Contact = ({ credentials }: ContactProps) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -48,29 +52,11 @@ const Contact = () => {
     });
     const [isSending, setIsSending] = useState(false);
     const [status, setStatus] = useState<{ success?: string; error?: string }>({});
-    const [credentials, setCredentials] = useState<Credentials | null>(null);
-
-    useEffect(() => {
-        const fetchCredentials = async () => {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/api/credentials`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch credentials');
-                }
-                const data = await response.json();
-                setCredentials(data);
-            } catch (error) {
-                console.error('Error fetching credentials:', error);
-            }
-        };
-
-        fetchCredentials();
-    }, []);
 
     useEffect(() => {
         const loadRecaptcha = async () => {
             try {
-                await window.grecaptcha?.ready(() => {
+                 window.grecaptcha?.ready(() => {
                     console.log('reCAPTCHA ready');
                 });
             } catch (error) {
