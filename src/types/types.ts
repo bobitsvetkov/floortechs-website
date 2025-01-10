@@ -1,5 +1,13 @@
 export type Page = 'home' | 'solutions' | 'work' | 'installation' | 'contact';
 
+export interface Credentials {
+    emailJsPublicKey: string;
+    emailJsServiceKey: string;
+    emailJsTemplateKey: string;
+    recaptchaSiteKey: string;
+    googleMapsApiKey: string;
+}
+
 // import { motion } from 'framer-motion';
 // import { ArrowRight, Building2, Ruler, ShieldCheck } from 'lucide-react';
 
