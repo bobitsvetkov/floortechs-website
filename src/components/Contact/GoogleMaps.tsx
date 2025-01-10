@@ -2,7 +2,6 @@ import { memo, useState, useEffect, useCallback } from 'react';
 import { GoogleMap, InfoWindow, LoadScript, Libraries } from '@react-google-maps/api';
 import { Credentials } from '../../types/types';
 const GOOGLE_MAPS_LIBRARIES: Libraries = ['places', 'drawing', 'geometry', 'visualization'];
-
 const mapContainerStyle = {
     height: '400px',
     width: '100%',
@@ -84,9 +83,7 @@ const MapComponent = memo(() => {
             </div>
         );
     }
-
     const GOOGLE_MAPS_API_KEY = credentials.googleMapsApiKey;
-    console.log(GOOGLE_MAPS_API_KEY)
 
     return (
         <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={GOOGLE_MAPS_LIBRARIES}>
