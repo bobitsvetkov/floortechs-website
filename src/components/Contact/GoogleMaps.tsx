@@ -42,7 +42,7 @@ const MapComponent = memo(() => {
                     title: 'Premium Flooring Showroom',
                 });
 
-                currentMarker.addEventListener('click', () => {
+                currentMarker.addListener('click', () => {
                     console.log('Marker clicked');
                     setShowInfoWindow(true);
                 });
