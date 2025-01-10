@@ -6,20 +6,12 @@ import Solutions from './components/Solution/Solution';
 import Work from './components/Work/Work';
 import Installation from './components/Installation/Installation';
 import Contact from './components/Contact/Contact';
-import { LoadScript, Libraries } from '@react-google-maps/api';
 import Footer from './components/Footer/Footer';
-
-console.log(import.meta.env);
-console.log(import.meta.env.VITE_GOOGLE_MAPS_KEY);
-const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_KEY as string;
-console.log(GOOGLE_MAPS_API_KEY)
-const GOOGLE_MAPS_LIBRARIES: Libraries = ['places', 'drawing', 'geometry', 'visualization'];
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState<string>('home');
 
   return (
-    <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={GOOGLE_MAPS_LIBRARIES}>
     <Router>
       <div id='root' className="min-h-screen bg-black text-white">
         <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
@@ -35,7 +27,6 @@ const App = () => {
         <Footer />
       </div>
     </Router>
-    </LoadScript>
   );
 };
 
