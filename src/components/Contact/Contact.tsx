@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { MapPin, Clock, Phone, Mail } from 'lucide-react';
-import { GoogleMap, InfoWindow } from '@react-google-maps/api';
 import { useState, useEffect, useCallback, memo } from 'react';
 import emailjs from '@emailjs/browser';
+import type { Credentials } from '../../types/types';
+import MapComponent from './GoogleMaps';
 
 interface ContactInfo {
     icon: JSX.Element;
@@ -17,16 +18,6 @@ declare global {
         };
     }
 }
-
-const mapContainerStyle = {
-    width: '100%',
-    height: '400px',
-} as const;
-
-const center = {
-    lat: 37.7749,
-    lng: -122.4194,
-} as const;
 
 const CONTACT_INFO: ContactInfo[] = [
     { icon: <MapPin className="w-6 h-6" />, text: 'Sample Address' },
@@ -47,72 +38,6 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
     </motion.div>
 ));
 
-const MapComponent = memo(() => {
-    const [showInfoWindow, setShowInfoWindow] = useState(false);
-    const [map, setMap] = useState<google.maps.Map | null>(null);
-    const [marker, setMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
-
-    const onLoad = useCallback((map: google.maps.Map) => {
-        setMap(map);
-    }, []);
-
-    useEffect(() => {
-        if (map && !marker) {
-            const loadMarker = async () => {
-                try {
-                    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
-                    const newMarker = new AdvancedMarkerElement({
-                        map,
-                        position: center,
-                        title: 'Premium Flooring Showroom'
-                    });
-
-                    newMarker.addListener('click', () => setShowInfoWindow(true));
-                    setMarker(newMarker);
-                } catch (error) {
-                    console.error('Error loading marker:', error);
-                }
-            };
-            loadMarker();
-        }
-    }, [map, marker]);
-
-    return (
-        <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={center}
-            zoom={14}
-            onLoad={onLoad}
-            options={{
-                mapId: import.meta.env.VITE_MAP_ID,
-            }}
-        >
-            {showInfoWindow && (
-                <InfoWindow
-                    position={center}
-                    onCloseClick={() => setShowInfoWindow(false)}
-                >
-                    <div style={{
-                        color: '#1a1310',
-                        padding: '8px',
-                        minWidth: '200px'
-                    }}>
-                        <h3 style={{
-                            fontSize: '1.125rem',
-                            fontWeight: '700',
-                            marginBottom: '4px'
-                        }}>
-                            Premium Flooring Showroom
-                        </h3>
-                        <p style={{ marginBottom: '4px' }}>123 Floor Street, Design District</p>
-                        <p>Mon - Sat: 9:00 AM - 6:00 PM</p>
-                    </div>
-                </InfoWindow>
-            )}
-        </GoogleMap>
-    );
-});
-
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -123,6 +48,24 @@ const Contact = () => {
     });
     const [isSending, setIsSending] = useState(false);
     const [status, setStatus] = useState<{ success?: string; error?: string }>({});
+    const [credentials, setCredentials] = useState<Credentials | null>(null);
+
+    useEffect(() => {
+        const fetchCredentials = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/api/credentials`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch credentials');
+                }
+                const data = await response.json();
+                setCredentials(data);
+            } catch (error) {
+                console.error('Error fetching credentials:', error);
+            }
+        };
+
+        fetchCredentials();
+    }, []);
 
     useEffect(() => {
         const loadRecaptcha = async () => {
@@ -151,28 +94,22 @@ const Contact = () => {
         setStatus({});
 
         try {
-            if (!window.grecaptcha) {
-                throw new Error('reCAPTCHA not loaded');
+            if (!window.grecaptcha || !credentials?.recaptchaSiteKey) {
+                throw new Error('reCAPTCHA or credentials not loaded');
             }
-            console.log("recaptcha site key", import.meta.env.VITE_RECAPTCHA_SITE_KEY)
 
-            const token = await window.grecaptcha.execute(
-                import.meta.env.VITE_RECAPTCHA_SITE_KEY,
-                { action: 'submit' }
-            );
-            console.log('reCAPTCHA token:', token);
-            const backendServer = import.meta.env.VITE_BACKEND_SERVER;
-            if (!backendServer) {
-                throw new Error('Backend server URL is not defined');
-            }
-            const verificationResponse = await fetch(backendServer, {
+            const token = await window.grecaptcha.execute(credentials.recaptchaSiteKey, {
+                action: 'submit',
+            });
+
+            const verificationResponse = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/verify-captcha`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token })
+                body: JSON.stringify({ token }),
             });
 
             if (!verificationResponse.ok) {
-                throw new Error('Verification request failed');
+                throw new Error('CAPTCHA verification request failed');
             }
 
             const verificationResult = await verificationResponse.json();
@@ -182,10 +119,10 @@ const Contact = () => {
             }
 
             await emailjs.send(
-                import.meta.env.VITE_EMAIL_JS_SERVICE_KEY,
-                import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY,
+                credentials.emailJsServiceKey || '',
+                credentials.emailJsTemplateKey || '',
                 formData,
-                import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY
+                credentials.emailJsPublicKey || ''
             );
 
             setStatus({ success: 'Message sent successfully!' });
