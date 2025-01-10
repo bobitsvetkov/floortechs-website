@@ -1,4 +1,4 @@
-import { memo, useState, useEffect, useCallback } from 'react';
+import { memo, useState, useEffect, useCallback, useRef } from 'react';
 import { GoogleMap, InfoWindow } from '@react-google-maps/api';
 
 const mapContainerStyle = {
@@ -15,6 +15,7 @@ const MapComponent = memo(() => {
     const [showInfoWindow, setShowInfoWindow] = useState(false);
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const [marker, setMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
+    const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(null);
 
     const onLoad = useCallback((map: google.maps.Map) => {
         setMap(map);
@@ -42,6 +43,8 @@ const MapComponent = memo(() => {
                     title: 'Premium Flooring Showroom',
                 });
 
+                markerRef.current = currentMarker;
+
                 currentMarker.addListener('click', () => {
                     console.log('Marker clicked');
                     setShowInfoWindow(true);
@@ -57,8 +60,8 @@ const MapComponent = memo(() => {
 
         // Cleanup
         return () => {
-            if (currentMarker) {
-                currentMarker.map = null;
+            if (markerRef.current) {
+                markerRef.current.map = null;
             }
         };
     }, [map, marker]);
