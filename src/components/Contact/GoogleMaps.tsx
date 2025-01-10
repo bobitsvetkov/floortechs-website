@@ -86,6 +86,7 @@ const MapComponent = memo(() => {
     }
 
     const GOOGLE_MAPS_API_KEY = credentials.googleMapsApiKey;
+    console.log(GOOGLE_MAPS_API_KEY)
 
     return (
         <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={GOOGLE_MAPS_LIBRARIES}>
