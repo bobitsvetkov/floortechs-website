@@ -14,8 +14,7 @@ const center = {
 const MapComponent = memo(() => {
     const [showInfoWindow, setShowInfoWindow] = useState(false);
     const [map, setMap] = useState<google.maps.Map | null>(null);
-    const [marker, setMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
-    const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(null);
+    const markerRef = useRef<google.maps.Marker | null>(null);
 
     const onLoad = useCallback((map: google.maps.Map) => {
         setMap(map);
@@ -24,20 +23,18 @@ const MapComponent = memo(() => {
     useEffect(() => {
         if (!map) return;
 
-        let currentMarker: google.maps.marker.AdvancedMarkerElement | null = null;
-
         const loadMarker = async () => {
             try {
                 // Clean up existing marker if any
-                if (marker) {
-                    marker.map = null;
+                if (markerRef.current) {
+                    markerRef.current.setMap(null); // Proper cleanup
                 }
 
-                const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+                const { Marker } = (await google.maps.importLibrary(
                     'marker'
                 )) as google.maps.MarkerLibrary;
 
-                currentMarker = new AdvancedMarkerElement({
+                const currentMarker = new Marker({
                     map,
                     position: center,
                     title: 'Premium Flooring Showroom',
@@ -49,8 +46,6 @@ const MapComponent = memo(() => {
                     console.log('Marker clicked');
                     setShowInfoWindow(true);
                 });
-
-                setMarker(currentMarker);
             } catch (error) {
                 console.error('Error loading marker:', error);
             }
@@ -58,13 +53,13 @@ const MapComponent = memo(() => {
 
         loadMarker();
 
-        // Cleanup
+        // Cleanup function
         return () => {
             if (markerRef.current) {
-                markerRef.current.map = null;
+                markerRef.current.setMap(null); // Proper cleanup on unmount
             }
         };
-    }, [map, marker]);
+    }, [map]);
 
     return (
         <GoogleMap
@@ -76,7 +71,7 @@ const MapComponent = memo(() => {
                 mapId: import.meta.env.VITE_MAP_ID,
             }}
         >
-            {showInfoWindow && marker && (
+            {showInfoWindow && markerRef.current && (
                 <InfoWindow
                     position={center}
                     onCloseClick={() => setShowInfoWindow(false)}
