@@ -20,26 +20,26 @@ const Home: React.FC = () => {
     }, []);
 
     return (
-        <main ref={containerRef} className="relative min-h-screen w-full bg-[#1a1310]">
+        <main ref={containerRef} className="relative min-h-screen w-full bg-white">
             {/* Loading Animation */}
             <motion.div
                 initial={false}
                 animate={isLoaded ? { height: 0 } : { height: "100vh" }}
                 transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-                className="fixed inset-0 bg-[#0a0807] z-50 flex items-center justify-center"
+                className="fixed inset-0 bg-blue-50 z-50 flex items-center justify-center"
             >
                 <motion.div
                     initial={{ opacity: 1, scale: 1 }}
                     animate={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.8 }}
-                    className="text-3xl text-amber-100 font-light tracking-widest"
+                    className="text-3xl text-blue-600 font-light tracking-widest"
                 >
                     EXCELLENCE IN FLOORING
                 </motion.div>
             </motion.div>
 
             {/* Hero Section */}
-            <section className="relative h-screen flex items-center overflow-hidden bg-gradient-to-b from-[#0a0807] to-[#1a1310]">
+            <section className="relative h-screen flex items-center overflow-hidden bg-gradient-to-b from-blue-50 to-white">
                 {/* Background Image */}
                 <div className="absolute inset-0">
                     <motion.div
@@ -51,9 +51,9 @@ const Home: React.FC = () => {
                         <img
                             src="/api/placeholder/1920/1080"
                             alt="Luxury Flooring"
-                            className="w-full h-full object-cover opacity-60"
+                            className="w-full h-full object-cover opacity-80"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0807]/90 via-[#1a1310]/80 to-[#1a1310]" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/90 via-white/80 to-white" />
                     </motion.div>
                 </div>
 
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
                             transition={{ duration: 0.5 }}
                             className="mb-6"
                         >
-                            <span className="text-7xl font-bold leading-tight bg-gradient-to-r from-amber-200 to-amber-100 bg-clip-text text-transparent">
+                            <span className="text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
                                 Transform Your Space
                             </span>
                         </motion.h1>
@@ -79,7 +79,7 @@ const Home: React.FC = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
-                            className="text-xl text-amber-100/80 mb-8"
+                            className="text-xl text-blue-800/80 mb-8"
                         >
                             Experience the perfect blend of luxury and durability with our premium flooring solutions
                         </motion.p>
@@ -92,8 +92,8 @@ const Home: React.FC = () => {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="group px-8 py-4 bg-amber-100 text-[#0a0807] rounded-xl 
-                                    font-medium overflow-hidden hover:bg-amber-200 transition-all duration-300 
+                                className="group px-8 py-4 bg-blue-600 text-white rounded-xl 
+                                    font-medium overflow-hidden hover:bg-blue-700 transition-all duration-300 
                                     flex items-center gap-2"
                             >
                                 Explore Our Collection
@@ -102,8 +102,8 @@ const Home: React.FC = () => {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="px-8 py-4 border-2 border-amber-100 text-amber-100 rounded-xl
-                                    hover:bg-amber-100 hover:text-[#0a0807] transition-all duration-300"
+                                className="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-xl
+                                    hover:bg-blue-600 hover:text-white transition-all duration-300"
                             >
                                 Book Consultation
                             </motion.button>
@@ -117,7 +117,7 @@ const Home: React.FC = () => {
                     transition={{ duration: 2, repeat: Infinity }}
                     className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
                 >
-                    <ChevronDown className="w-8 h-8 text-amber-100/60" />
+                    <ChevronDown className="w-8 h-8 text-blue-400" />
                 </motion.div>
             </section>
 
@@ -126,7 +126,7 @@ const Home: React.FC = () => {
             {/* Scroll Progress Bar */}
             <motion.div
                 style={{ scaleX: springScroll }}
-                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-200 to-amber-100/80 
+                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400 
                     transform origin-left z-50"
             />
         </main>
