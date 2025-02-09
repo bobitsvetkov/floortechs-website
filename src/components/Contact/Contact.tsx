@@ -27,18 +27,17 @@ const CONTACT_INFO: ContactInfo[] = [
     { icon: <MapPin className="w-6 h-6" />, text: '326 Penn ave West Reading, Pennsylvania 19611' },
     { icon: <Clock className="w-6 h-6" />, text: 'Mon - Fri: 9:00 AM - 5:00 PM' },
     { icon: <Phone className="w-6 h-6" />, text: '610-573-9895' },
-    { icon: <Mail className="w-6 h-6" />, text: 'ajaber@floor-techs.com'}
+    { icon: <Mail className="w-6 h-6" />, text: 'ajaber@floor-techs.com' }
 ];
 
-// Memoized components
 const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
     <motion.div
         whileHover={{ scale: 1.05 }}
-        className="flex items-center space-x-4 p-4 bg-amber-100/5 rounded-xl
-        hover:bg-amber-100/10 transition-colors duration-300"
+        className="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl 
+                   hover:bg-blue-100 transition-colors duration-300"
     >
-        <span className="text-amber-200">{info.icon}</span>
-        <span className="text-amber-100/80">{info.text}</span>
+        <span className="text-blue-500">{info.icon}</span>
+        <span className="text-blue-600">{info.text}</span>
     </motion.div>
 ));
 
@@ -56,7 +55,7 @@ const Contact = ({ credentials }: ContactProps) => {
     useEffect(() => {
         const loadRecaptcha = async () => {
             try {
-                 window.grecaptcha?.ready(() => {
+                window.grecaptcha?.ready(() => {
                     console.log('reCAPTCHA ready');
                 });
             } catch (error) {
@@ -122,7 +121,7 @@ const Contact = ({ credentials }: ContactProps) => {
     };
 
     return (
-        <div className="pt-20 min-h-screen bg-[#1a1310]">
+        <div className="pt-20 min-h-screen bg-white">
             <div className="max-w-7xl mx-auto px-4 py-24">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                     <motion.div
@@ -130,8 +129,8 @@ const Contact = ({ credentials }: ContactProps) => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-                        <form onSubmit={handleSubmit} className="bg-amber-100/5 backdrop-blur-lg p-8 rounded-2xl border border-amber-100/10">
-                            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-amber-200 to-amber-100 bg-clip-text text-transparent">
+                        <form onSubmit={handleSubmit} className="bg-blue-50 backdrop-blur-lg p-8 rounded-2xl border border-blue-100">
+                            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-blue-400 bg-clip-text text-transparent">
                                 Get in Touch
                             </h2>
                             <div className="space-y-6">
@@ -145,32 +144,32 @@ const Contact = ({ credentials }: ContactProps) => {
                                         whileHover={{ scale: 1.02 }}
                                         className="group"
                                     >
-                                        <label className="block text-sm font-medium text-amber-100/80 mb-2">
+                                        <label className="block text-sm font-medium text-blue-600 mb-2">
                                             {field.label}
                                         </label>
                                         <input
                                             type={field.type}
                                             name={field.name}
-                                            value= {formData[field.name as keyof typeof formData]}
+                                            value={formData[field.name as keyof typeof formData]}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-amber-100/5 border border-amber-100/10 rounded-lg
-                                            text-amber-100 placeholder-amber-100/30 focus:border-amber-200/50 focus:ring-2
-                                            focus:ring-amber-200/20 transition-all duration-300"
+                                            className="w-full px-4 py-3 bg-blue-50 border border-blue-100 rounded-lg
+                                                       text-blue-700 placeholder-blue-400 focus:border-blue-300 focus:ring-2
+                                                       focus:ring-blue-300/20 transition-all duration-300"
                                             placeholder={`Enter your ${field.label.toLowerCase()}`}
                                             required={field.name !== 'phone'}
                                         />
                                     </motion.div>
                                 ))}
                                 <motion.div whileHover={{ scale: 1.02 }}>
-                                    <label className="block text-sm font-medium text-amber-100/80 mb-2">Message</label>
+                                    <label className="block text-sm font-medium text-blue-600 mb-2">Message</label>
                                     <textarea
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
                                         rows={4}
-                                        className="w-full px-4 py-3 bg-amber-100/5 border border-amber-100/10 rounded-lg
-                                        text-amber-100 placeholder-amber-100/30 focus:border-amber-200/50 focus:ring-2
-                                        focus:ring-amber-200/20 transition-all duration-300"
+                                        className="w-full px-4 py-3 bg-blue-50 border border-blue-100 rounded-lg
+                                                   text-blue-700 placeholder-blue-400 focus:border-blue-300 focus:ring-2
+                                                   focus:ring-blue-300/20 transition-all duration-300"
                                         placeholder="Tell us about your project"
                                         required
                                     />
@@ -180,12 +179,12 @@ const Contact = ({ credentials }: ContactProps) => {
                                     disabled={isSending}
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full bg-gradient-to-r from-amber-200 to-amber-100 text-[#1a1310] py-4
-                                    rounded-lg font-medium relative overflow-hidden group disabled:opacity-70"
+                                    className="w-full bg-gradient-to-r from-blue-500 to-blue-400 text-white py-4
+                                               rounded-lg font-medium relative overflow-hidden group disabled:opacity-70"
                                 >
                                     <span className="relative z-10">{isSending ? 'Sending...' : 'Send Message'}</span>
                                     <motion.div
-                                        className="absolute inset-0 bg-gradient-to-r from-amber-100 to-amber-200"
+                                        className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500"
                                         initial={{ x: '100%' }}
                                         whileHover={{ x: 0 }}
                                         transition={{ duration: 0.3 }}
@@ -203,7 +202,7 @@ const Contact = ({ credentials }: ContactProps) => {
                         viewport={{ once: true }}
                         className="space-y-8"
                     >
-                        <h2 className="text-3xl font-bold bg-gradient-to-r from-amber-200 to-amber-100 bg-clip-text text-transparent">
+                        <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-blue-400 bg-clip-text text-transparent">
                             Visit Our Showroom
                         </h2>
                         <div className="rounded-2xl overflow-hidden">

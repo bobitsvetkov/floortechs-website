@@ -8,7 +8,7 @@ const mapContainerStyle = {
 
 const center = {
     lat: 40.335183601418,
-    lng: - 75.94501798525825,
+    lng: -75.94501798525825,
 };
 
 const MapComponent = memo(() => {
@@ -27,7 +27,7 @@ const MapComponent = memo(() => {
             try {
                 // Clean up existing marker if any
                 if (markerRef.current) {
-                    markerRef.current.setMap(null); // Proper cleanup
+                    markerRef.current.setMap(null);
                 }
 
                 const { Marker } = (await google.maps.importLibrary(
@@ -53,10 +53,9 @@ const MapComponent = memo(() => {
 
         loadMarker();
 
-        // Cleanup function
         return () => {
             if (markerRef.current) {
-                markerRef.current.setMap(null); // Proper cleanup on unmount
+                markerRef.current.setMap(null);
             }
         };
     }, [map]);
@@ -78,9 +77,12 @@ const MapComponent = memo(() => {
                 >
                     <div
                         style={{
-                            color: '#1a1310',
+                            backgroundColor: '#ffffff',
+                            color: '#1E3A8A',
                             padding: '8px',
                             minWidth: '200px',
+                            borderRadius: '8px',
+                            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.15)',
                         }}
                     >
                         <h3
@@ -90,9 +92,11 @@ const MapComponent = memo(() => {
                                 marginBottom: '4px',
                             }}
                         >
-                            Premium Flooring Showroom
+                            Floor Techs Location
                         </h3>
-                        <p style={{ marginBottom: '4px' }}>123 Floor Street, Design District</p>
+                        <p style={{ marginBottom: '4px' }}>
+                            326 Penn Ave West Reading, Pennsylvania 19611
+                        </p>
                         <p>Mon - Sat: 9:00 AM - 6:00 PM</p>
                     </div>
                 </InfoWindow>
