@@ -1,18 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, MotionValue } from 'framer-motion';
-import { ChevronDown, ArrowRight } from 'lucide-react';
 import FeaturedProjects from './Projects';
+import background from '../../assets/background.mp4';
 
 const Home: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     const { scrollYProgress } = useScroll();
-
     const springScroll: MotionValue<number> = useSpring(scrollYProgress, {
         stiffness: 100,
         damping: 30,
-        restDelta: 0.001
+        restDelta: 0.001,
     });
 
     useEffect(() => {
@@ -24,7 +23,7 @@ const Home: React.FC = () => {
             {/* Loading Animation */}
             <motion.div
                 initial={false}
-                animate={isLoaded ? { height: 0 } : { height: "100vh" }}
+                animate={isLoaded ? { height: 0 } : { height: '100vh' }}
                 transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
                 className="fixed inset-0 bg-blue-50 z-50 flex items-center justify-center"
             >
@@ -37,88 +36,73 @@ const Home: React.FC = () => {
                     EXCELLENCE IN FLOORING
                 </motion.div>
             </motion.div>
-
-            {/* Hero Section */}
-            <section className="relative h-screen flex items-center overflow-hidden bg-gradient-to-b from-blue-50 to-white">
-                {/* Background Image */}
+            <section className="relative h-screen flex items-center overflow-hidden">
                 <div className="absolute inset-0">
-                    <motion.div
-                        initial={{ scale: 1.2 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
-                        className="relative w-full h-full"
-                    >
-                        <img
-                            src="/api/placeholder/1920/1080"
-                            alt="Luxury Flooring"
-                            className="w-full h-full object-cover opacity-80"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-b from-blue-50/90 via-white/80 to-white" />
-                    </motion.div>
+                    <video
+                        src={background}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover scale-105 brightness-[0.85]"
+                    />
                 </div>
 
                 {/* Hero Content */}
-                <div className="relative max-w-7xl mx-auto px-4 py-32">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="max-w-3xl"
-                    >
+                <div className="relative max-w-7xl mx-auto px-4 py-32 text-white">
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
                         <motion.h1
                             initial={{ scale: 0.9 }}
                             animate={{ scale: 1 }}
                             transition={{ duration: 0.5 }}
-                            className="mb-6"
+                            className="text-5xl lg:text-7xl font-bold leading-tight mb-8"
                         >
-                            <span className="text-7xl font-bold leading-tight bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                                Transform Your Space
-                            </span>
+                            Elevating Commercial Environments Through Superior Flooring Solutions.
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2, duration: 0.8 }}
-                            className="text-xl text-blue-800/80 mb-8"
+                            className="text-lg lg:text-2xl text-white/90 mb-10 max-w-2xl"
                         >
-                            Experience the perfect blend of luxury and durability with our premium flooring solutions
+                            Our focus currently lies in commercial flooring installations, where we provide high-quality, durable flooring solutions for a wide range of industries.
                         </motion.p>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 0.8 }}
-                            className="flex gap-4"
-                        >
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="group px-8 py-4 bg-blue-600 text-white rounded-xl 
-                                    font-medium overflow-hidden hover:bg-blue-700 transition-all duration-300 
-                                    flex items-center gap-2"
-                            >
-                                Explore Our Collection
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </motion.button>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-xl
-                                    hover:bg-blue-600 hover:text-white transition-all duration-300"
-                            >
-                                Book Consultation
-                            </motion.button>
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }}>
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full text-lg focus:outline-none">
+                                View Our Commercial Projects
+                            </button>
                         </motion.div>
                     </motion.div>
                 </div>
+            </section>
 
-                {/* Scroll Indicator */}
-                <motion.div
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-                >
-                    <ChevronDown className="w-8 h-8 text-blue-400" />
-                </motion.div>
+            {/* "Why Choose Us" Section */}
+            <section id="services" className="py-20 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-4">
+                    <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">
+                        Why Choose Us for Commercial Flooring?
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="p-6 bg-white shadow rounded transition transform hover:-translate-y-1 hover:shadow-lg">
+                            <h3 className="text-xl font-semibold text-blue-600 mb-2">Template Text. Will ask later.</h3>
+                            <p className="text-gray-700">
+                                Template Text. Will ask later.
+                            </p>
+                        </div>
+                        <div className="p-6 bg-white shadow rounded transition transform hover:-translate-y-1 hover:shadow-lg">
+                            <h3 className="text-xl font-semibold text-blue-600 mb-2">Template Text. Will ask later.</h3>
+                            <p className="text-gray-700">
+                                Template Text. Will ask later.
+                            </p>
+                        </div>
+                        <div className="p-6 bg-white shadow rounded transition transform hover:-translate-y-1 hover:shadow-lg">
+                            <h3 className="text-xl font-semibold text-blue-600 mb-2">Template Text. Will ask later.</h3>
+                            <p className="text-gray-700">
+                                Template Text. Will ask later.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <FeaturedProjects />
@@ -126,8 +110,7 @@ const Home: React.FC = () => {
             {/* Scroll Progress Bar */}
             <motion.div
                 style={{ scaleX: springScroll }}
-                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400 
-                    transform origin-left z-50"
+                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-blue-400 transform origin-left z-50"
             />
         </main>
     );
