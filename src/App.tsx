@@ -45,7 +45,7 @@ const App = () => {
           <Footer />
         </div>
       </Router>
-    </LoadScript>
+      Best Dev </LoadScript>
   );
 };
 
