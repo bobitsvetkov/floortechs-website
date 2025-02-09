@@ -24,10 +24,10 @@ declare global {
 }
 
 const CONTACT_INFO: ContactInfo[] = [
-    { icon: <MapPin className="w-6 h-6" />, text: 'Sample Address' },
+    { icon: <MapPin className="w-6 h-6" />, text: '326 Penn ave West Reading, Pennsylvania 19611' },
     { icon: <Clock className="w-6 h-6" />, text: 'Mon - Fri: 9:00 AM - 5:00 PM' },
-    { icon: <Phone className="w-6 h-6" />, text: '99999999' },
-    { icon: <Mail className="w-6 h-6" />, text: 'test@gmail.com' }
+    { icon: <Phone className="w-6 h-6" />, text: '610-573-9895' },
+    { icon: <Mail className="w-6 h-6" />, text: 'ajaber@floor-techs.com'}
 ];
 
 // Memoized components
