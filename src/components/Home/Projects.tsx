@@ -11,31 +11,19 @@ const FeaturedProjects = () => {
 
     const projects = [
         {
-            title: "Polish for Dicks Sporting Goods in (Rochester, New York)",
-            subtitle: "Preserving Heritage Through Innovation",
-            type: "Heritage",
-            location: "Chicago Cultural Center",
-            duration: "12 weeks",
+            title: "Polish for Dicks Sporting Goods in (Rochester, New York)",
             transformationDetails: "The existing porous floor was restored by filling all holes with grout for a smooth surface. It was then polished and treated with an acetone dye, enhancing the natural finish and creating a seamless, durable, and visually refined look.",
             beforeImage: firstProjectBefore,
             afterImage: firtProjectAfter
         },
         {
             title: "Epoxy for Kitchen: Waterproof & Durable Solution",
-            subtitle: "Modern Elegance Meets Timeless Design",
-            type: "Residential",
-            location: "Beverly Hills",
-            duration: "6 weeks",
             transformationDetails: "Durable, waterproof, and seamless. Resists moisture, stains, and wear while offering a sleek, customizable finish for lasting style and performance.",
             beforeImage: secondProjectBefore,
             afterImage: secondProjectAfter
         },
         {
             title: "Boutique Hotel Suites",
-            subtitle: "Elevating Hospitality Experiences",
-            type: "Hospitality",
-            location: "Los Angeles",
-            duration: "9 weeks",
             transformationDetails: "Template text. Will ask later.",
             beforeImage: firstProjectBefore,
             afterImage: firtProjectAfter
@@ -57,13 +45,13 @@ const FeaturedProjects = () => {
     };
 
     useEffect(() => {
-        const handleKeyDown = (e) => {
+        const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'ArrowLeft') previousProject();
             if (e.key === 'ArrowRight') nextProject();
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    });
 
     return (
         <section className="min-h-screen bg-gradient-to-b from-white to-blue-50 py-16">
@@ -154,8 +142,7 @@ const FeaturedProjects = () => {
                             <button
                                 key={index}
                                 onClick={() => setCurrentProject(index)}
-                                className={`w-16 h-1 rounded-full transition-all duration-300 ${currentProject === index ? 'bg-blue-500' : 'bg-blue-200'
-                                    }`}
+                                className={`w-16 h-1 rounded-full transition-all duration-300 ${currentProject === index ? 'bg-blue-500' : 'bg-blue-200'}`}
                             />
                         ))}
                     </div>
