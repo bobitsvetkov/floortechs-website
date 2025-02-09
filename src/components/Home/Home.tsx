@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, MotionValue } from 'framer-motion';
 import FeaturedProjects from './Projects';
 import background from '../../assets/background.mp4';
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -68,9 +69,11 @@ const Home: React.FC = () => {
                             Our focus currently lies in commercial flooring installations, where we provide high-quality, durable flooring solutions for a wide range of industries.
                         </motion.p>
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }}>
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full text-lg focus:outline-none">
-                                View Our Commercial Projects
-                            </button>
+                            <Link to="/Solutions">
+                                <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full text-lg focus:outline-none">
+                                    View Our Commercial Projects
+                                </button>
+                            </Link>
                         </motion.div>
                     </motion.div>
                 </div>
