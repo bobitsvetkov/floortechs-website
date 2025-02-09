@@ -3,8 +3,6 @@ import { useState } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import Solutions from './components/Solution/Solution';
-import Work from './components/Work/Work';
-import Installation from './components/Installation/Installation';
 import Contact from './components/Contact/Contact';
 import { LoadScript, Libraries } from '@react-google-maps/api';
 import Footer from './components/Footer/Footer';
@@ -41,15 +39,13 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/solutions" element={<Solutions />} />
-              <Route path="/work" element={<Work />} />
-              <Route path="/installation" element={<Installation />} />
               <Route path="/contact" element={<Contact credentials={credentials} />} />
             </Routes>
           </div>
           <Footer />
         </div>
       </Router>
-    </LoadScript>
+    // </LoadScript>
   );
 };
 
