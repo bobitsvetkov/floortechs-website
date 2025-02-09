@@ -81,7 +81,7 @@ const Footer = () => {
                     className="mt-16 pt-8 border-t border-gray-100"
                 >
                     <div className="text-gray-500 text-sm text-center">
-                        &copy; {currentYear} Excellence in Flooring. All Rights Reserved.
+                        &copy; {currentYear} Floor-Techs. All Rights Reserved.
                     </div>
                 </motion.div>
             </div>
