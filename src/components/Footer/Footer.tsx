@@ -1,147 +1,89 @@
-import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
-import {Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
-import { BsFacebook, BsInstagram, BsLinkedin} from 'react-icons/bs';
+import { Phone, Mail, MapPin } from 'lucide-react';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
 
-    const quickLinks = [
-        { to: '/', label: 'Home' },
-        { to: '/solutions', label: 'Solutions' },
-        { to: '/work', label: 'Portfolio' },
-        { to: '/installation', label: 'Installation' },
-        { to: '/contact', label: 'Contact' }
-    ];
-
-    const services = [
-        { to: '/residential', label: 'Residential Flooring' },
-        { to: '/commercial', label: 'Commercial Solutions' },
-        { to: '/consultation', label: 'Design Consultation' },
-        { to: '/maintenance', label: 'Maintenance Services' }
-    ];
-
-    const socialLinks = [
-        { Icon: BsFacebook, href: '#', label: 'Facebook' },
-        { Icon: BsInstagram, href: '#', label: 'Instagram' },
-        { Icon: BsLinkedin, href: '#', label: 'LinkedIn' }
-    ];
-
     const contactInfo = [
-        { Icon: Phone, text: '999999' },
-        { Icon: Mail, text: 'sampleEmail@gmail.com' },
-        { Icon: MapPin, text: 'Test Address,\nTest Address Line 2' }
+        { Icon: Phone, text: '610-573-9895' },
+        { Icon: Mail, text: 'ajaber@floor-techs.com' },
+        { Icon: MapPin, text: '326 Penn aveWest Reading, Pennsylvania 19611' }
     ];
 
     return (
-        <footer className="bg-gray-900 text-white">
-            {/* Upper Footer */}
-            <div className="bg-blue-600 py-16">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                        <div className="max-w-2xl">
-                            <h3 className="text-3xl font-bold mb-4">Ready to Transform Your Space?</h3>
-                            <p className="text-blue-100 text-lg">
-                                Let's discuss your project and create something extraordinary together.
-                            </p>
-                        </div>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="px-8 py-4 bg-white text-blue-600 rounded-xl font-medium 
-                                hover:bg-blue-50 transition-colors flex items-center gap-2"
-                        >
-                            Schedule Consultation
-                            <ChevronRight className="w-5 h-5" />
-                        </motion.button>
-                    </div>
+        <footer className="relative bg-white overflow-hidden">
+            {/* Geometric Pattern Overlay */}
+            <div className="absolute inset-0">
+                <div className="absolute inset-0 grid grid-cols-6 gap-1">
+                    {[...Array(48)].map((_, i) => (
+                        <div
+                            key={i}
+                            className="w-full h-16 bg-blue-100 transform rotate-45"
+                            style={{
+                                opacity: (i % 3 + 1) * 0.2,
+                                transform: `rotate(45deg) translateX(${(i % 3) * 10}px)`
+                            }}
+                        />
+                    ))}
                 </div>
             </div>
 
-            {/* Main Footer Content */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    {/* Company Info */}
-                    <div className="space-y-6">
-                        <h3 className="text-2xl font-bold">EXCELLENCE IN FLOORING</h3>
-                        <p className="text-gray-400">
-                            Setting the standard in premium flooring solutions since 1995.
+            <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                    {/* Company Vision - Left Side */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="space-y-6"
+                    >
+                        <h3 className="text-4xl font-bold text-blue-600">
+                            Elevating Spaces Through
+                            <span className="block mt-2 text-blue-500">
+                                Innovation
+                            </span>
+                        </h3>
+                        <p className="text-gray-600 max-w-md leading-relaxed text-lg">
+                            Setting new standards in commercial flooring with precision engineering
+                            and contemporary design solutions for modern enterprises.
                         </p>
-                        <div className="flex gap-4">
-                            {socialLinks.map(({ Icon, href, label }) => (
-                                <a
-                                    key={label}
-                                    href={href}
-                                    aria-label={label}
-                                    className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center
-                                        hover:bg-blue-600 transition-colors duration-300"
-                                >
-                                    <Icon size={20} />
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Quick Links */}
-                    <div>
-                        <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
-                        <div className="grid gap-4">
-                            {quickLinks.map(({ to, label }) => (
-                                <Link
-                                    key={label}
-                                    to={to}
-                                    className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-2"
-                                >
-                                    <ChevronRight className="w-4 h-4" />
-                                    {label}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Services */}
-                    <div>
-                        <h4 className="text-lg font-semibold mb-6">Our Services</h4>
-                        <div className="grid gap-4">
-                            {services.map(({ to, label }) => (
-                                <Link
-                                    key={label}
-                                    to={to}
-                                    className="text-gray-400 hover:text-blue-400 transition-colors flex items-center gap-2"
-                                >
-                                    <ChevronRight className="w-4 h-4" />
-                                    {label}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Contact Info */}
-                    <div>
-                        <h4 className="text-lg font-semibold mb-6">Contact Us</h4>
-                        <div className="space-y-4">
-                            {contactInfo.map(({ Icon, text }, idx) => (
-                                <div key={idx} className="flex items-start gap-3 text-gray-400">
-                                    <Icon className="w-5 h-5 mt-1 flex-shrink-0" />
-                                    <span className="leading-relaxed">{text}</span>
+                    {/* Contact Information - Right Side */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="md:ml-auto space-y-6"
+                    >
+                        {contactInfo.map(({ Icon, text }, idx) => (
+                            <motion.div
+                                key={idx}
+                                whileHover={{ x: 5 }}
+                                className="group flex items-center gap-4 text-gray-600 hover:text-blue-600 
+                                    transition-colors duration-300"
+                            >
+                                <div className="w-10 h-10 rounded-lg bg-white/80 backdrop-blur-sm flex items-center 
+                                    justify-center group-hover:bg-blue-100 transition-colors duration-300 shadow-sm">
+                                    <Icon className="w-5 h-5" />
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                                <span className="leading-relaxed">{text}</span>
+                            </motion.div>
+                        ))}
+                    </motion.div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="mt-16 pt-8 border-t border-gray-800">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="text-gray-500 text-sm">
-                            &copy; {currentYear} Excellence in Flooring. All Rights Reserved.
-                        </div>
-                        <div className="flex gap-6 text-sm text-gray-500">
-                            <Link to="/privacy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link>
-                            <Link to="/terms" className="hover:text-blue-400 transition-colors">Terms of Service</Link>
-                        </div>
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-16 pt-8 border-t border-gray-100"
+                >
+                    <div className="text-gray-500 text-sm text-center">
+                        &copy; {currentYear} Excellence in Flooring. All Rights Reserved.
                     </div>
-                </div>
+                </motion.div>
             </div>
         </footer>
     );
