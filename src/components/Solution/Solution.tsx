@@ -4,24 +4,24 @@ import { MapPin, Clock } from 'lucide-react';
 const Solutions = () => {
     const projects = [
         {
-            name: 'Modern Office Complex',
-            description: 'Contemporary luxury vinyl installation with acoustic underlayment for a tech company headquarters.',
-            location: 'San Francisco',
-            duration: '10 weeks',
+            name: 'template',
+            description: 'template',
+            location: 'template',
+            duration: 'template',
             image: '/api/placeholder/800/600'
         },
         {
-            name: 'Luxury Villa Renovation',
-            description: 'Complete hardwood flooring installation with custom inlay patterns and premium finishes.',
-            location: 'Beverly Hills',
-            duration: '6 weeks',
+            name: 'template',
+            description: 'template',
+            location: 'template',
+            duration: 'template',
             image: '/api/placeholder/800/600'
         },
         {
-            name: 'Boutique Hotel Suites',
-            description: 'Custom pattern wool carpeting with hardwood borders for an upscale hospitality project.',
-            location: 'Los Angeles',
-            duration: '9 weeks',
+            name: 'template',
+            description: 'template',
+            location: 'template',
+            duration: 'template',
             image: '/api/placeholder/800/600'
         }
     ];
