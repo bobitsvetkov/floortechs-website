@@ -1,30 +1,33 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { MapPin, Clock } from 'lucide-react';
 
 const Solutions = () => {
-    const solutions = [
+    const projects = [
         {
-            name: 'Artisan Hardwood',
-            desc: 'Hand-selected premium hardwood flooring that transforms spaces with timeless sophistication and natural warmth.',
-            features: ['Quarter-sawn oak', 'Brazilian walnut', 'Reclaimed teak'],
-            image: '/api/placeholder/800/1000'
+            name: 'Modern Office Complex',
+            description: 'Contemporary luxury vinyl installation with acoustic underlayment for a tech company headquarters.',
+            location: 'San Francisco',
+            duration: '10 weeks',
+            image: '/api/placeholder/800/600'
         },
         {
-            name: 'Designer Laminate',
-            desc: 'Revolutionary laminate solutions combining cutting-edge technology with stunning aesthetics for modern living.',
-            features: ['Stone-plastic composite', 'German engineering', 'Acoustical underlayment'],
-            image: '/api/placeholder/800/1000'
+            name: 'Luxury Villa Renovation',
+            description: 'Complete hardwood flooring installation with custom inlay patterns and premium finishes.',
+            location: 'Beverly Hills',
+            duration: '6 weeks',
+            image: '/api/placeholder/800/600'
         },
         {
-            name: 'Luxury Vinyl',
-            desc: 'State-of-the-art vinyl flooring offering unparalleled durability with the elegant appearance of natural materials.',
-            features: ['Waterproof core', 'Commercial grade', 'Designer patterns'],
-            image: '/api/placeholder/800/1000'
+            name: 'Boutique Hotel Suites',
+            description: 'Custom pattern wool carpeting with hardwood borders for an upscale hospitality project.',
+            location: 'Los Angeles',
+            duration: '9 weeks',
+            image: '/api/placeholder/800/600'
         }
     ];
 
     return (
-        <section className="min-h-screen bg-[#1a1310] pt-20">
+        <section className="min-h-screen bg-gray-50 pt-20">
             <div className="max-w-7xl mx-auto px-4 py-24">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -32,85 +35,58 @@ const Solutions = () => {
                     viewport={{ once: true }}
                     className="text-center mb-24"
                 >
-                    <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-amber-200 to-amber-100 bg-clip-text text-transparent mb-6">
-                        Exceptional Flooring
+                    <h1 className="text-6xl md:text-7xl font-bold text-blue-600 mb-6">
+                        Our Projects
                     </h1>
-                    <p className="text-xl text-amber-100/80 max-w-2xl mx-auto">
-                        Discover our curated collection of premium flooring solutions, where innovation meets timeless elegance
+                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        A showcase of our finest flooring installations, where precision meets design excellence
                     </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {solutions.map((solution, idx) => (
+                    {projects.map((project, idx) => (
                         <motion.div
                             key={idx}
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.2 }}
-                            className="group relative"
+                            className="group"
                         >
-                            <div className="relative h-[600px] rounded-2xl overflow-hidden">
-                                {/* Background Gradient Animation */}
-                                <motion.div
-                                    className="absolute -inset-2 bg-gradient-to-r from-amber-200/20 to-amber-100/20 blur-2xl opacity-0 
-                                        group-hover:opacity-70 transition-opacity duration-700"
-                                    animate={{
-                                        rotate: [0, 360],
-                                    }}
-                                    transition={{
-                                        duration: 10,
-                                        repeat: Infinity,
-                                        ease: "linear"
-                                    }}
-                                />
+                            <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl 
+                                transition-all duration-300 transform hover:-translate-y-1">
+                                {/* Image */}
+                                <div className="relative h-64 overflow-hidden">
+                                    <img
+                                        src={project.image}
+                                        alt={project.name}
+                                        className="w-full h-full object-cover transform scale-105 group-hover:scale-110 
+                                            transition-transform duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
+                                </div>
 
-                                {/* Main Content */}
-                                <div className="relative h-full bg-amber-100/5 rounded-2xl overflow-hidden 
-                                    border border-amber-100/10 group-hover:border-amber-100/30 transition-colors duration-500"
-                                >
-                                    {/* Image */}
-                                    <div className="h-2/3 overflow-hidden">
-                                        <img
-                                            src={solution.image}
-                                            alt={solution.name}
-                                            className="w-full h-full object-cover transform scale-110 group-hover:scale-105 
-                                                transition-transform duration-700"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1310]/50 to-[#1a1310]" />
-                                    </div>
+                                {/* Content */}
+                                <div className="p-6">
+                                    <h2 className="text-2xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 
+                                        transition-colors duration-300">
+                                        {project.name}
+                                    </h2>
 
-                                    {/* Content */}
-                                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                                        <h2 className="text-3xl font-semibold text-amber-100 mb-4">{solution.name}</h2>
-                                        <p className="text-amber-100/70 mb-6 line-clamp-2 group-hover:line-clamp-none 
-                                            transition-all duration-300">
-                                            {solution.desc}
-                                        </p>
+                                    <p className="text-gray-600 mb-6">
+                                        {project.description}
+                                    </p>
 
-                                        {/* Features */}
-                                        <motion.div
-                                            initial={{ opacity: 0, height: 0 }}
-                                            whileInView={{ opacity: 1, height: 'auto' }}
-                                            className="space-y-2 mb-6 hidden group-hover:block"
-                                        >
-                                            {solution.features.map((feature, fidx) => (
-                                                <div key={fidx} className="flex items-center gap-2 text-amber-100/60">
-                                                    <span className="text-xs">✧</span>
-                                                    <span>{feature}</span>
-                                                </div>
-                                            ))}
-                                        </motion.div>
-
-                                        {/* Button */}
-                                        <motion.button
-                                            whileHover={{ x: 5 }}
-                                            className="flex items-center gap-2 text-amber-200 hover:text-amber-100 
-                                                transition-colors duration-300"
-                                        >
-                                            Explore Collection
-                                            <ArrowRight className="w-4 h-4" />
-                                        </motion.button>
+                                    {/* Project Details */}
+                                    <div className="space-y-3">
+                                        <div className="flex items-center gap-2 text-gray-500">
+                                            <MapPin className="w-4 h-4 text-blue-500" />
+                                            <span>{project.location}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-gray-500">
+                                            <Clock className="w-4 h-4 text-blue-500" />
+                                            <span>Duration: {project.duration}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
