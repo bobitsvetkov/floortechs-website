@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight} from 'lucide-react';
 import firstProjectBefore from '../../assets/showcaseProjectBefore1.jpg';
-import firtProjectAfter from '../../assets/showcaseProjectAfter1.jpg';
+import firstProjectAfter from '../../assets/showcaseProjectAfter1.jpg';
 import secondProjectBefore from '../../assets/showcaseProjectBefore2.jpg';
 import secondProjectAfter from '../../assets/showcaseProjectAfter2.jpg';
 const FeaturedProjects = () => {
@@ -14,7 +14,7 @@ const FeaturedProjects = () => {
             title: "Polish for Dicks Sporting Goods in (Rochester, New York)",
             transformationDetails: "The existing porous floor was restored by filling all holes with grout for a smooth surface. It was then polished and treated with an acetone dye, enhancing the natural finish and creating a seamless, durable, and visually refined look.",
             beforeImage: firstProjectBefore,
-            afterImage: firtProjectAfter
+            afterImage: firstProjectAfter
         },
         {
             title: "Epoxy for Kitchen: Waterproof & Durable Solution",
@@ -26,7 +26,7 @@ const FeaturedProjects = () => {
             title: "Boutique Hotel Suites",
             transformationDetails: "Template text. Will ask later.",
             beforeImage: firstProjectBefore,
-            afterImage: firtProjectAfter
+            afterImage: firstProjectAfter
         }
     ];
 
