@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import logo from '../../assets/logo.png'
 import type { FC } from 'react';
 
 const NAVIGATION_ITEMS = [
@@ -22,10 +23,7 @@ const Navbar: FC = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2">
-                        <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md">
-                            <span className="text-white font-bold text-xl">PF</span>
-                        </div>
-                        <span className="text-blue-600 text-lg font-semibold">Premium Flooring</span>
+                        <img src={logo} alt="FloorTechs Logo" className="h-10 w-auto object-contain" />
                     </Link>
 
                     {/* Desktop Navigation */}
