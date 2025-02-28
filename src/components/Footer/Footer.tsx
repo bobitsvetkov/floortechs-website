@@ -7,7 +7,7 @@ const Footer = () => {
     const contactInfo = [
         { Icon: Phone, text: '610-573-9895' },
         { Icon: Mail, text: 'ajaber@floor-techs.com' },
-        { Icon: MapPin, text: '326 Penn aveWest Reading, Pennsylvania 19611' }
+        { Icon: MapPin, text: '326 Penn ave West Reading, Pennsylvania 19611' }
     ];
 
     return (
