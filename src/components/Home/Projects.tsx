@@ -5,6 +5,8 @@ import firstProjectBefore from '../../assets/showcaseProjectBefore1.jpg';
 import firstProjectAfter from '../../assets/showcaseProjectAfter1.jpg';
 import secondProjectBefore from '../../assets/showcaseProjectBefore2.jpg';
 import secondProjectAfter from '../../assets/showcaseProjectAfter2.jpg';
+import thirdProjectBefore from '../../assets/showcaseProjectBefore3.jpg'
+import thirdProjectAfter from '../../assets/showcaseProjectAfter3.jpg'
 const FeaturedProjects = () => {
     const [currentProject, setCurrentProject] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
@@ -23,10 +25,10 @@ const FeaturedProjects = () => {
             afterImage: secondProjectAfter
         },
         {
-            title: "Boutique Hotel Suites",
+            title: "Template",
             transformationDetails: "Template text. Will ask later.",
-            beforeImage: firstProjectBefore,
-            afterImage: firstProjectAfter
+            beforeImage: thirdProjectBefore,
+            afterImage: thirdProjectAfter
         }
     ];
 

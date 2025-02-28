@@ -1,28 +1,31 @@
 import { motion } from 'framer-motion';
 import { MapPin, Clock } from 'lucide-react';
+import firstProjectAfter from '../../assets/showcaseProjectAfter1.jpg';
+import secondProjectAfter from '../../assets/showcaseProjectAfter2.jpg';
+import thirdProjectAfter from '../../assets/showcaseProjectAfter3.jpg'
 
 const Solutions = () => {
     const projects = [
         {
-            name: 'template',
-            description: 'template',
+            name: 'Polish for Dicks Sporting Goods',
+            description: 'The existing porous floor was restored by filling all holes with grout for a smooth surface. It was then polished and treated with an acetone dye, enhancing the natural finish and creating a seamless, durable, and visually refined look.',
+            location: 'Rochester, New York',
+            duration: 'template',
+            image: firstProjectAfter
+        },
+        {
+            name: 'Epoxy for Kitchen: Waterproof & Durable Solution',
+            description: 'Durable, waterproof, and seamless. Resists moisture, stains, and wear while offering a sleek, customizable finish for lasting style and performance',
             location: 'template',
             duration: 'template',
-            image: '/api/placeholder/800/600'
+            image: secondProjectAfter
         },
         {
             name: 'template',
             description: 'template',
             location: 'template',
             duration: 'template',
-            image: '/api/placeholder/800/600'
-        },
-        {
-            name: 'template',
-            description: 'template',
-            location: 'template',
-            duration: 'template',
-            image: '/api/placeholder/800/600'
+            image: thirdProjectAfter
         }
     ];
 
