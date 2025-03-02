@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
-import { MapPin, Clock, Phone, Mail } from 'lucide-react';
-import { useState, useEffect, useCallback, memo } from 'react';
+import { MapPin, Clock, Phone, Mail, ExternalLink } from 'lucide-react';
+import { useState, useCallback, memo } from 'react';
 import emailjs from '@emailjs/browser';
-import MapComponent from './GoogleMaps';
 import { useCredentials } from '../../hooks/useCredentials';
 
 interface ContactInfo {
     icon: JSX.Element;
     text: string;
+    href?: string;
 }
 
 declare global {
@@ -20,20 +20,44 @@ declare global {
 }
 
 const CONTACT_INFO: ContactInfo[] = [
-    { icon: <MapPin className="w-6 h-6" />, text: '326 Penn ave West Reading, Pennsylvania 19611' },
+    { 
+        icon: <MapPin className="w-6 h-6" />, 
+        text: '326 Penn ave West Reading, Pennsylvania 19611',
+        href: 'https://maps.google.com/?q=326+Penn+ave+West+Reading+Pennsylvania+19611'
+    },
     { icon: <Clock className="w-6 h-6" />, text: 'Mon - Fri: 9:00 AM - 5:00 PM' },
-    { icon: <Phone className="w-6 h-6" />, text: '610-573-9895' },
-    { icon: <Mail className="w-6 h-6" />, text: 'ajaber@floor-techs.com' }
+    { 
+        icon: <Phone className="w-6 h-6" />, 
+        text: '610-573-9895',
+        href: 'tel:6105739895'
+    },
+    { 
+        icon: <Mail className="w-6 h-6" />, 
+        text: 'ajaber@floor-techs.com',
+        href: 'mailto:ajaber@floor-techs.com'
+    }
 ];
 
 const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
     <motion.div
-        whileHover={{ scale: 1.05 }}
-        className="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl 
-                   hover:bg-blue-100 transition-colors duration-300"
+        whileHover={{ scale: 1.03 }}
+        className="flex items-center space-x-4 p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl 
+                   border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300"
     >
-        <span className="text-blue-500">{info.icon}</span>
-        <span className="text-blue-600">{info.text}</span>
+        <span className="text-blue-500 bg-blue-50 p-2 rounded-full">{info.icon}</span>
+        {info.href ? (
+            <a 
+                href={info.href} 
+                target={info.href.startsWith('http') ? "_blank" : undefined}
+                rel={info.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                className="text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center"
+            >
+                {info.text}
+                {info.href.startsWith('http') && <ExternalLink className="w-4 h-4 ml-2" />}
+            </a>
+        ) : (
+            <span className="text-blue-600">{info.text}</span>
+        )}
     </motion.div>
 ));
 
@@ -43,24 +67,10 @@ const Contact = () => {
         name: '',
         email: '',
         phone: '',
-        subject: '',
         message: ''
     });
     const [isSending, setIsSending] = useState(false);
     const [status, setStatus] = useState<{ success?: string; error?: string }>({});
-
-    useEffect(() => {
-        const loadRecaptcha = async () => {
-            try {
-                window.grecaptcha?.ready(() => {
-                    console.log('reCAPTCHA ready');
-                });
-            } catch (error) {
-                console.error('reCAPTCHA loading error:', error);
-            }
-        };
-        loadRecaptcha();
-    }, []);
 
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -107,8 +117,8 @@ const Contact = () => {
                 credentials.emailJsPublicKey || ''
             );
 
-            setStatus({ success: 'Message sent successfully!' });
-            setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+            setStatus({ success: 'Message sent successfully! We\'ll get back to you soon.' });
+            setFormData({ name: '', email: '', phone: '', message: '' });
         } catch (error) {
             setStatus({ error: (error as Error).message || 'Failed to send message' });
             console.error('Form submission error:', error);
@@ -120,17 +130,34 @@ const Contact = () => {
     return (
         <div className="pt-20 min-h-screen bg-white">
             <div className="max-w-7xl mx-auto px-4 py-24">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                {/* Header Section */}
+                <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
+                >
+                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mb-4">
+                        Contact Floor-Techs
+                    </h1>
+                    <p className="text-blue-700/70 max-w-2xl mx-auto">
+                        Have questions about our flooring solutions? Get in touch with our team for expert advice and support.
+                    </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+                    {/* Contact Form */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
+                        initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
                     >
-                        <form onSubmit={handleSubmit} className="bg-blue-50 backdrop-blur-lg p-8 rounded-2xl border border-blue-100">
-                            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-blue-400 bg-clip-text text-transparent">
+                        <form onSubmit={handleSubmit} className="bg-white shadow-lg backdrop-blur-lg p-8 rounded-2xl border border-blue-100">
+                            <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
                                 Get in Touch
                             </h2>
-                            <div className="space-y-6">
+                            <div className="space-y-5">
                                 {[
                                     { label: 'Name', type: 'text', name: 'name' },
                                     { label: 'Email', type: 'email', name: 'email' },
@@ -138,7 +165,7 @@ const Contact = () => {
                                 ].map((field) => (
                                     <motion.div
                                         key={field.label}
-                                        whileHover={{ scale: 1.02 }}
+                                        whileHover={{ scale: 1.01 }}
                                         className="group"
                                     >
                                         <label className="block text-sm font-medium text-blue-600 mb-2">
@@ -149,7 +176,7 @@ const Contact = () => {
                                             name={field.name}
                                             value={formData[field.name as keyof typeof formData]}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-blue-50 border border-blue-100 rounded-lg
+                                            className="w-full px-4 py-3 bg-blue-50/50 border border-blue-100 rounded-lg
                                                        text-blue-700 placeholder-blue-400 focus:border-blue-300 focus:ring-2
                                                        focus:ring-blue-300/20 transition-all duration-300"
                                             placeholder={`Enter your ${field.label.toLowerCase()}`}
@@ -157,17 +184,17 @@ const Contact = () => {
                                         />
                                     </motion.div>
                                 ))}
-                                <motion.div whileHover={{ scale: 1.02 }}>
+                                <motion.div whileHover={{ scale: 1.01 }}>
                                     <label className="block text-sm font-medium text-blue-600 mb-2">Message</label>
                                     <textarea
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
                                         rows={4}
-                                        className="w-full px-4 py-3 bg-blue-50 border border-blue-100 rounded-lg
+                                        className="w-full px-4 py-3 bg-blue-50/50 border border-blue-100 rounded-lg
                                                    text-blue-700 placeholder-blue-400 focus:border-blue-300 focus:ring-2
                                                    focus:ring-blue-300/20 transition-all duration-300"
-                                        placeholder="Tell us about your project"
+                                        placeholder="Tell us about your project or questions"
                                         required
                                     />
                                 </motion.div>
@@ -176,41 +203,109 @@ const Contact = () => {
                                     disabled={isSending}
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="w-full bg-gradient-to-r from-blue-500 to-blue-400 text-white py-4
+                                    className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-4
                                                rounded-lg font-medium relative overflow-hidden group disabled:opacity-70"
                                 >
                                     <span className="relative z-10">{isSending ? 'Sending...' : 'Send Message'}</span>
                                     <motion.div
-                                        className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-500"
+                                        className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600"
                                         initial={{ x: '100%' }}
                                         whileHover={{ x: 0 }}
                                         transition={{ duration: 0.3 }}
                                     />
                                 </motion.button>
-                                {status.success && <p className="text-green-500 text-center mt-4">{status.success}</p>}
-                                {status.error && <p className="text-red-500 text-center mt-4">{status.error}</p>}
+                                {status.success && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="bg-green-50 text-green-600 p-3 rounded-lg border border-green-100 mt-4 text-center"
+                                    >
+                                        <p>{status.success}</p>
+                                    </motion.div>
+                                )}
+                                {status.error && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="bg-red-50 text-red-600 p-3 rounded-lg border border-red-100 mt-4 text-center"
+                                    >
+                                        <p>{status.error}</p>
+                                    </motion.div>
+                                )}
                             </div>
                         </form>
                     </motion.div>
 
+                    {/* Contact Info Section */}
                     <motion.div
-                        initial={{ opacity: 0, x: 50 }}
+                        initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
+                        transition={{ delay: 0.2 }}
                         className="space-y-8"
                     >
-                        <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-blue-400 bg-clip-text text-transparent">
-                            Visit Our Showroom
-                        </h2>
-                        <div className="rounded-2xl overflow-hidden">
-                            <MapComponent />
+                        <div>
+                            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mb-6">
+                                Visit Our Showroom
+                            </h2>
+                            
+                            {/* Location Preview */}
+                            <motion.div
+                                whileHover={{ scale: 1.02 }}
+                                className="relative mb-8 overflow-hidden rounded-2xl shadow-lg border border-blue-100"
+                            >
+                                <a 
+                                    href="https://maps.google.com/?q=326+Penn+ave+West+Reading+Pennsylvania+19611" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="block"
+                                >
+                                    <div className="bg-gradient-to-br from-blue-100 to-blue-50 aspect-video flex items-center justify-center p-8">
+                                        <div className="text-center">
+                                            <MapPin className="w-16 h-16 text-blue-500 mx-auto mb-4" />
+                                            <h3 className="text-xl font-bold text-blue-700">Floor-Techs Showroom</h3>
+                                            <p className="text-blue-600 mt-2">326 Penn ave West Reading, Pennsylvania 19611</p>
+                                            <div className="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
+                                                <span>View on Google Maps</span>
+                                                <ExternalLink className="w-4 h-4 ml-2" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </motion.div>
+                            
+                            {/* Contact Details */}
+                            <div className="grid grid-cols-1 gap-4">
+                                {CONTACT_INFO.map((info, idx) => (
+                                    <ContactInfoItem key={idx} info={info} />
+                                ))}
+                            </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {CONTACT_INFO.map((info, idx) => (
-                                <ContactInfoItem key={idx} info={info} />
-                            ))}
-                        </div>
+                        {/* CTA Card */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3 }}
+                            className="bg-gradient-to-br from-blue-600 to-blue-500 p-8 rounded-2xl text-white shadow-lg mt-6"
+                        >
+                            <h3 className="text-xl font-bold mb-2">Ready to transform your space?</h3>
+                            <p className="mb-4 text-blue-100">
+                                Visit our showroom to explore our flooring options and speak with our experts in person.
+                            </p>
+                            <motion.a 
+                                href="https://maps.google.com/?q=326+Penn+ave+West+Reading+Pennsylvania+19611"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg font-medium"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                <MapPin className="w-5 h-5 mr-2" />
+                                Get Directions
+                            </motion.a>
+                        </motion.div>
                     </motion.div>
                 </div>
             </div>
