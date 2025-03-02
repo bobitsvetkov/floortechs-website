@@ -4,7 +4,6 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
-import GoogleMapsWrapper from './components/Contact/GoogleMapsWrapper';
 
 const Contact = lazy(() => import('./components/Contact/Contact'));
 const Solutions = lazy(() => import('./components/Solution/Solution'));
@@ -20,9 +19,7 @@ const App = () => {
           path="/Solutions" 
           element={
             <Suspense fallback={<LoadingSpinner size="md" />}>
-              <GoogleMapsWrapper>
                 <Solutions />
-              </GoogleMapsWrapper>
             </Suspense>
           } 
         />
@@ -30,9 +27,7 @@ const App = () => {
           path="/Contact" 
           element={
             <Suspense fallback={<LoadingSpinner size="md" />}>
-              {/* <GoogleMapsWrapper> */}
                 <Contact />
-              {/* </GoogleMapsWrapper> */}
             </Suspense>
           } 
         />
