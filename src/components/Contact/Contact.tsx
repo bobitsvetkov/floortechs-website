@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Clock, Phone, Mail, ExternalLink } from 'lucide-react';
+import { MapPin, Clock, Phone, Mail} from 'lucide-react';
 import { useState, useCallback, memo } from 'react';
 import emailjs from '@emailjs/browser';
 import { useCredentials } from '../../hooks/useCredentials';
@@ -23,18 +23,15 @@ const CONTACT_INFO: ContactInfo[] = [
     { 
         icon: <MapPin className="w-6 h-6" />, 
         text: '326 Penn ave West Reading, Pennsylvania 19611',
-        href: 'https://maps.google.com/?q=326+Penn+ave+West+Reading+Pennsylvania+19611'
     },
     { icon: <Clock className="w-6 h-6" />, text: 'Mon - Fri: 9:00 AM - 5:00 PM' },
     { 
         icon: <Phone className="w-6 h-6" />, 
         text: '610-573-9895',
-        href: 'tel:6105739895'
     },
     { 
         icon: <Mail className="w-6 h-6" />, 
         text: 'ajaber@floor-techs.com',
-        href: 'mailto:ajaber@floor-techs.com'
     }
 ];
 
@@ -45,19 +42,6 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
                    border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300"
     >
         <span className="text-blue-500 bg-blue-50 p-2 rounded-full">{info.icon}</span>
-        {info.href ? (
-            <a 
-                href={info.href} 
-                target={info.href.startsWith('http') ? "_blank" : undefined}
-                rel={info.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                className="text-blue-600 hover:text-blue-700 transition-colors duration-200 flex items-center"
-            >
-                {info.text}
-                {info.href.startsWith('http') && <ExternalLink className="w-4 h-4 ml-2" />}
-            </a>
-        ) : (
-            <span className="text-blue-600">{info.text}</span>
-        )}
     </motion.div>
 ));
 
