@@ -163,7 +163,7 @@ const Contact = () => {
                                             onChange={handleChange}
                                             className="w-full px-4 py-3 bg-blue-50/50 border border-blue-100 rounded-lg
                                                        text-blue-700 placeholder-blue-400 focus:border-blue-300 focus:ring-2
-                                                       focus:ring-blue-300/20 transition-all duration-300"
+                                                       focus:ring-sky-400 transition-all duration-300"
                                             placeholder={`Enter your ${field.label.toLowerCase()}`}
                                             required={field.name !== 'phone'}
                                         />
@@ -178,7 +178,7 @@ const Contact = () => {
                                         rows={4}
                                         className="w-full px-4 py-3 bg-blue-50/50 border border-blue-100 rounded-lg
                                                    text-blue-700 placeholder-blue-400 focus:border-blue-300 focus:ring-2
-                                                   focus:ring-blue-300/20 transition-all duration-300"
+                                                   focus:ring-sky-400 transition-all duration-300"
                                         placeholder="Tell us about your project or questions"
                                         required
                                     />
