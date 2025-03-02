@@ -42,6 +42,7 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
                    border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300"
     >
         <span className="text-blue-500 bg-blue-50 p-2 rounded-full">{info.icon}</span>
+        <span className="text-blue-600">{info.text}</span>
     </motion.div>
 ));
 
