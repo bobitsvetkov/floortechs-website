@@ -2,16 +2,12 @@ import { motion } from 'framer-motion';
 import { MapPin, Clock, Phone, Mail } from 'lucide-react';
 import { useState, useEffect, useCallback, memo } from 'react';
 import emailjs from '@emailjs/browser';
-import type { Credentials } from '../../types/types';
 import MapComponent from './GoogleMaps';
+import { useCredentials } from '../../hooks/useCredentials';
 
 interface ContactInfo {
     icon: JSX.Element;
     text: string;
-}
-
-interface ContactProps {
-    credentials: Credentials;
 }
 
 declare global {
@@ -41,7 +37,8 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
     </motion.div>
 ));
 
-const Contact = ({ credentials }: ContactProps) => {
+const Contact = () => {
+    const { credentials } = useCredentials();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
