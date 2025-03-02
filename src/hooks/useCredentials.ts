@@ -17,8 +17,8 @@ export const useCredentials = () => {
                 setCredentials(data);
                 setError(null);
             } catch (error) {
-                console.error('Error fetching credentials:', error);
                 setError('Failed to load credentials');
+                console.error('Error fetching credentials:', error);
             } finally {
                 setIsLoading(false);
             }

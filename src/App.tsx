@@ -30,9 +30,9 @@ const App = () => {
           path="/Contact" 
           element={
             <Suspense fallback={<LoadingSpinner size="md" />}>
-              <GoogleMapsWrapper>
+              {/* <GoogleMapsWrapper> */}
                 <Contact />
-              </GoogleMapsWrapper>
+              {/* </GoogleMapsWrapper> */}
             </Suspense>
           } 
         />

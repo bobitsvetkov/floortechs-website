@@ -244,36 +244,7 @@ const Contact = () => {
                         transition={{ delay: 0.2 }}
                         className="space-y-8"
                     >
-                        <div>
-                            <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mb-6">
-                                Visit Our Showroom
-                            </h2>
-                            
-                            {/* Location Preview */}
-                            <motion.div
-                                whileHover={{ scale: 1.02 }}
-                                className="relative mb-8 overflow-hidden rounded-2xl shadow-lg border border-blue-100"
-                            >
-                                <a 
-                                    href="https://maps.google.com/?q=326+Penn+ave+West+Reading+Pennsylvania+19611" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="block"
-                                >
-                                    <div className="bg-gradient-to-br from-blue-100 to-blue-50 aspect-video flex items-center justify-center p-8">
-                                        <div className="text-center">
-                                            <MapPin className="w-16 h-16 text-blue-500 mx-auto mb-4" />
-                                            <h3 className="text-xl font-bold text-blue-700">Floor-Techs Showroom</h3>
-                                            <p className="text-blue-600 mt-2">326 Penn ave West Reading, Pennsylvania 19611</p>
-                                            <div className="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
-                                                <span>View on Google Maps</span>
-                                                <ExternalLink className="w-4 h-4 ml-2" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </motion.div>
-                            
+                        <div>                            
                             {/* Contact Details */}
                             <div className="grid grid-cols-1 gap-4">
                                 {CONTACT_INFO.map((info, idx) => (
@@ -292,7 +263,7 @@ const Contact = () => {
                         >
                             <h3 className="text-xl font-bold mb-2">Ready to transform your space?</h3>
                             <p className="mb-4 text-blue-100">
-                                Visit our showroom to explore our flooring options and speak with our experts in person.
+                                Visit us to explore our flooring options and speak with our experts in person.
                             </p>
                             <motion.a 
                                 href="https://maps.google.com/?q=326+Penn+ave+West+Reading+Pennsylvania+19611"
