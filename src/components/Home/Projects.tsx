@@ -7,6 +7,7 @@ import secondProjectBefore from '../../assets/showcaseProjectBefore2.jpg';
 import secondProjectAfter from '../../assets/showcaseProjectAfter2.jpg';
 import thirdProjectBefore from '../../assets/showcaseProjectBefore3.jpg'
 import thirdProjectAfter from '../../assets/showcaseProjectAfter3.jpg'
+
 const FeaturedProjects = () => {
     const [currentProject, setCurrentProject] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);

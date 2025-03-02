@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, MotionValue } from 'framer-motion';
 import FeaturedProjects from './Projects';
-import backgroundMp4 from '../../assets/background.mp4';
 import backgroundWebm from '../../assets/backgroundWebm.webm';
 import { Link } from 'react-router-dom';
 
@@ -48,7 +47,6 @@ const Home: React.FC = () => {
                         className="absolute inset-0 w-full h-full object-cover scale-105 brightness-[0.85]"
                     >
                         <source src={backgroundWebm} />
-                        <source src={backgroundMp4} />
                     </video>
                 </div>
 
