@@ -6,6 +6,8 @@ import type { FC } from 'react';
 
 const NAVIGATION_ITEMS = [
     { label: 'Home', path: '/' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'Services', path: '/services' },
     { label: 'Solutions', path: '/solutions' },
     { label: 'Contact', path: '/contact' },
 ];
