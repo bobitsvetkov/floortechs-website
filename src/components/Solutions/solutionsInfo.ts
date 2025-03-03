@@ -21,7 +21,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Delivers dust-proof surfaces with excellent abrasion resistance"
       }
     ],
-    imageUrl: "/src/assets/showcaseProjectAfter1.jpg",
+    imageUrl: "/assets/showcaseProjectAfter1.jpg",
     primaryColor: "#2563EB"
   },
   {
@@ -44,7 +44,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Resists impact damage and heavy machinery traffic"
       }
     ],
-    imageUrl: "/src/assets/showcaseProjectAfter2.jpg",
+    imageUrl: "/assets/showcaseProjectAfter2.jpg",
     primaryColor: "#2563EB"
   },
   {
@@ -67,7 +67,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Resists automotive fluids, tire marking and abrasion"
       }
     ],
-    imageUrl: "/src/assets/showcaseProjectAfter3.jpg",
+    imageUrl: "/assets/showcaseProjectAfter3.jpg",
     primaryColor: "#2563EB"
   },
   {
@@ -90,7 +90,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Transforms aged concrete into new surfaces without demolition"
       }
     ],
-    imageUrl: "/src/assets/showcaseProjectAfter1.jpg",
+    imageUrl: "/assets/showcaseProjectAfter1.jpg",
     primaryColor: "#2563EB"
   },
   {
@@ -113,7 +113,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Delivers high-end finishes that enhance architectural design"
       }
     ],
-    imageUrl: "/src/assets/showcaseProjectAfter2.jpg",
+    imageUrl: "/assets/showcaseProjectAfter2.jpg",
     primaryColor: "#2563EB"
   }
 ];
