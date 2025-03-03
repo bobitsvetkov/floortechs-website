@@ -48,7 +48,7 @@ const Solutions: React.FC = () => {
                 {flooringSolution.tagline}
               </p>
               
-              <p className="text-gray-600 mb-6 line-clamp-3">{flooringSolution.description}</p>
+              <p className="text-gray-600 mb-6 line-clamp-3">{flooringSolution.shortDescription}</p>
               
               <div className="mt-auto">
                 <button 
@@ -135,7 +135,7 @@ const Solutions: React.FC = () => {
                 <div className="mb-8">
                   {activeTab === 'overview' && (
                     <div>
-                      <p className="text-gray-700 leading-relaxed mb-8 text-lg">{selectedSolution.description}</p>
+                      <p className="text-gray-700 leading-relaxed mb-8 text-lg">{selectedSolution.fullDescription}</p>
                       
                       <div className="bg-gray-50 p-6 rounded-lg border border-gray-100 shadow-sm">
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Why Choose This Solution?</h3>

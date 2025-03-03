@@ -16,7 +16,8 @@ export interface FlooringSolution {
   id: string;
   title: string;
   tagline: string;
-  description: string;
+  shortDescription: string;
+  fullDescription: string;
   idealFor: Industry[];
   imageUrl: string;
   primaryColor: string;
