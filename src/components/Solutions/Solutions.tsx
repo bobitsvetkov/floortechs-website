@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FlooringSolution } from '../../types/types';
 import { flooringSolutions, getBenefits } from './solutionsInfo';
-
+import { Link } from 'react-router-dom';
 const Solutions: React.FC = () => {
   const [selectedSolution, setSelectedSolution] = useState<FlooringSolution | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -192,6 +192,7 @@ const Solutions: React.FC = () => {
                   >
                     Close
                   </button>
+                  <Link to="/Contact">
                   <button 
                     className="text-white font-medium py-3 px-6 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2"
                     style={{ 
@@ -201,6 +202,7 @@ const Solutions: React.FC = () => {
                   >
                     Request Consultation
                   </button>
+                  </Link>
                 </div>
               </div>
             </div>
