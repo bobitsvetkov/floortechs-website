@@ -21,3 +21,12 @@ export interface FlooringSolution {
   imageUrl: string;
   primaryColor: string;
 }
+
+export interface FlooringService {
+  id: string;
+  title: string;
+  shortDescription: string;
+  fullDescription: string;
+  benefits: string[];
+  imageUrl: string;
+}
