@@ -6,7 +6,9 @@ import Footer from './components/Footer/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
 
 const Contact = lazy(() => import('./components/Contact/Contact'));
-const Solutions = lazy(() => import('./components/Solution/Solution'));
+const Projects = lazy(() => import('./components/Projects/Projects'));
+const Solutions = lazy(() => import('./components/Solutions/Solutions'));
+const Services = lazy(() => import('./components/Services/Services'));
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -16,10 +18,26 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route 
+          path="/Projects" 
+          element={
+            <Suspense fallback={<LoadingSpinner size="md" />}>
+                <Projects />
+            </Suspense>
+          } 
+        />
+        <Route 
           path="/Solutions" 
           element={
             <Suspense fallback={<LoadingSpinner size="md" />}>
                 <Solutions />
+            </Suspense>
+          } 
+        />
+        <Route 
+          path="/Services" 
+          element={
+            <Suspense fallback={<LoadingSpinner size="md" />}>
+                <Services />
             </Suspense>
           } 
         />
