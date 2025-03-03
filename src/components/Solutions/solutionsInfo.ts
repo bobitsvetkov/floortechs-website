@@ -19,7 +19,7 @@ export const flooringSolutions: FlooringSolution[] = [
           description: "Delivers dust-proof surfaces with excellent abrasion resistance"
         }
       ],
-      imageUrl: "/api/placeholder/500/300",
+      imageUrl: "/src/assets/showcaseProjectAfter1.jpg",
       primaryColor: "#2563EB"
     },
     {
@@ -41,7 +41,7 @@ export const flooringSolutions: FlooringSolution[] = [
           description: "Resists impact damage and heavy machinery traffic"
         }
       ],
-      imageUrl: "/api/placeholder/500/300",
+      imageUrl: "/src/assets/showcaseProjectAfter2.jpg",
       primaryColor: "#2563EB"
     },
     {
@@ -63,7 +63,7 @@ export const flooringSolutions: FlooringSolution[] = [
           description: "Resists automotive fluids, tire marking and abrasion"
         }
       ],
-      imageUrl: "/api/placeholder/500/300",
+      imageUrl: "/src/assets/showcaseProjectAfter3.jpg",
       primaryColor: "#2563EB"
     },
     {
@@ -85,7 +85,7 @@ export const flooringSolutions: FlooringSolution[] = [
           description: "Transforms aged concrete into new surfaces without demolition"
         }
       ],
-      imageUrl: "/api/placeholder/500/300",
+      imageUrl: "/src/assets/showcaseProjectAfter1.jpg",
       primaryColor: "#2563EB"
     },
     {
@@ -107,7 +107,7 @@ export const flooringSolutions: FlooringSolution[] = [
           description: "Delivers high-end finishes that enhance architectural design"
         }
       ],
-      imageUrl: "/api/placeholder/500/300",
+      imageUrl: "/src/assets/showcaseProjectAfter2.jpg",
       primaryColor: "#2563EB"
     }
   ];
@@ -116,40 +116,30 @@ export const flooringSolutions: FlooringSolution[] = [
     const benefitsMap: { [key: string]: { title: string, description: string }[] } = {
       "polished-concrete": [
         { title: "Mechanical Polish", description: "Diamond-ground surface with increasing levels of refinement" },
-        { title: "Densification", description: "Chemically hardened surface for improved abrasion resistance" },
         { title: "High Reflectivity", description: "Light-reflecting finish that reduces lighting requirements" },
         { title: "Minimal Maintenance", description: "Simple maintenance regimen with no waxing required" }
       ],
       "urethane-flooring": [
         { title: "Chemical Resistance", description: "Withstands acids, caustics, solvents and process chemicals" },
-        { title: "Thermal Stability", description: "Maintains integrity from -100°F to 220°F with minimal expansion" },
         { title: "Impact Absorption", description: "Flexible urethane matrix absorbs impacts without cracking" },
         { title: "Antimicrobial Options", description: "Available with built-in protection against bacteria and fungi" }
       ],
       "commercial-coatings": [
         { title: "Fast Application", description: "Rapid installation with minimal facility downtime" },
-        { title: "Aesthetic Flexibility", description: "Available in unlimited colors, patterns and finishes" },
         { title: "Chemical Protection", description: "Resistant to common chemicals, stains and spills" },
         { title: "Cost-Effective", description: "Excellent value with competitive installation costs" }
       ],
       "floor-resurfacers": [
         { title: "Structural Repair", description: "Restores load-bearing capacity to deteriorated concrete" },
-        { title: "Rapid Setting", description: "Fast-curing formulations for minimal downtime" },
         { title: "Surface Leveling", description: "Self-leveling capabilities for uneven substrates" },
         { title: "Cost Savings", description: "80% less expensive than full concrete replacement" }
       ],
       "decorative-broadcast": [
-        { title: "Design Versatility", description: "Unlimited color and pattern combinations" },
         { title: "Texture Control", description: "Customizable slip resistance for specific environments" },
         { title: "Depth & Dimension", description: "Multi-layered appearance with visual sophistication" },
         { title: "Seamless Integration", description: "Transitions smoothly to other flooring systems" }
       ]
     };
     
-    return benefitsMap[solution.id] || [
-      { title: "Durability", description: "Long-lasting performance in demanding environments" },
-      { title: "Easy Maintenance", description: "Simplified cleaning and maintenance requirements" },
-      { title: "Cost Efficiency", description: "Excellent value with long lifecycle performance" },
-      { title: "Customization", description: "Tailored to your specific facility requirements" }
-    ];
+    return benefitsMap[solution.id];
   };
