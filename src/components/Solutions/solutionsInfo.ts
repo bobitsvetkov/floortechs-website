@@ -1,4 +1,7 @@
 import { FlooringSolution } from "../../types/types";
+import firstProjectAfter from '../../assets/showcaseProjectAfter1.jpg';
+import secondProjectAfter from '../../assets/showcaseProjectAfter2.jpg';
+import thirdProjectAfter from '../../assets/showcaseProjectAfter3.jpg'
 
 export const flooringSolutions: FlooringSolution[] = [
   {
@@ -21,7 +24,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Delivers dust-proof surfaces with excellent abrasion resistance"
       }
     ],
-    imageUrl: "/assets/showcaseProjectAfter1.jpg",
+    imageUrl: firstProjectAfter,
     primaryColor: "#2563EB"
   },
   {
@@ -44,7 +47,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Resists impact damage and heavy machinery traffic"
       }
     ],
-    imageUrl: "/assets/showcaseProjectAfter2.jpg",
+    imageUrl: secondProjectAfter,
     primaryColor: "#2563EB"
   },
   {
@@ -67,7 +70,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Resists automotive fluids, tire marking and abrasion"
       }
     ],
-    imageUrl: "/assets/showcaseProjectAfter3.jpg",
+    imageUrl: thirdProjectAfter,
     primaryColor: "#2563EB"
   },
   {
@@ -90,7 +93,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Transforms aged concrete into new surfaces without demolition"
       }
     ],
-    imageUrl: "/assets/showcaseProjectAfter1.jpg",
+    imageUrl: secondProjectAfter,
     primaryColor: "#2563EB"
   },
   {
@@ -113,7 +116,7 @@ export const flooringSolutions: FlooringSolution[] = [
         description: "Delivers high-end finishes that enhance architectural design"
       }
     ],
-    imageUrl: "/assets/showcaseProjectAfter2.jpg",
+    imageUrl: firstProjectAfter,
     primaryColor: "#2563EB"
   }
 ];

@@ -1,4 +1,7 @@
 import { FlooringService } from "../../types/types";
+import firstProjectAfter from '../../assets/showcaseProjectAfter1.jpg';
+import secondProjectAfter from '../../assets/showcaseProjectAfter2.jpg';
+import thirdProjectAfter from '../../assets/showcaseProjectAfter3.jpg'
 export const services: FlooringService[] = [
     {
       id: "resurfacing",
@@ -11,7 +14,7 @@ export const services: FlooringService[] = [
         "Customizable finishes and textures",
         "Environmentally friendly options available"
       ],
-      imageUrl: "/assets/showcaseProjectAfter1.jpg"
+      imageUrl: firstProjectAfter
     },
     {
       id: "inspections",
@@ -24,7 +27,7 @@ export const services: FlooringService[] = [
         "Compliance verification with industry standards",
         "Preventative maintenance planning"
       ],
-      imageUrl: "/assets/showcaseProjectAfter2.jpg"
+      imageUrl: secondProjectAfter
     },
     {
       id: "rejuvenation",
@@ -37,7 +40,7 @@ export const services: FlooringService[] = [
         "Color restoration and sealing",
         "Same-day completion for most spaces"
       ],
-      imageUrl: "/assets/showcaseProjectAfter3.jpg"
+      imageUrl: thirdProjectAfter
     },
     {
       id: "repairs",
@@ -50,7 +53,7 @@ export const services: FlooringService[] = [
         "Joint sealing and reinforcement",
         "Subfloor issue correction"
       ],
-      imageUrl: "/assets/showcaseProjectAfter3.jpg"
+      imageUrl: thirdProjectAfter
     },
     {
       id: "maintenance",
@@ -63,6 +66,6 @@ export const services: FlooringService[] = [
         "Traffic pattern management solutions",
         "Slip resistance treatment options"
       ],
-      imageUrl: "/assets/showcaseProjectAfter1.jpg"
+      imageUrl: secondProjectAfter
     }
   ];
