@@ -18,7 +18,7 @@ const Services: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6 pt-10">
       <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">Commercial Flooring Services</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -49,19 +49,22 @@ const Services: React.FC = () => {
       {modalOpen && selectedSolution && (
         <>
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"
+            className="fixed inset-0 bg-black bg-opacity-80 z-40 transition-opacity backdrop-blur-sm"
             onClick={closeModal}
           ></div>
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto relative">
               <div className="p-6">
                 <div className="flex justify-between items-start">
                   <h2 className="text-2xl font-bold text-gray-800">{selectedSolution.title}</h2>
                   <button 
                     onClick={closeModal}
-                    className="text-gray-500 hover:text-gray-700 text-xl"
+                    className="absolute top-4 right-4 bg-black bg-opacity-60 text-white rounded-full p-2 hover:bg-opacity-80 transition-all"
+                    aria-label="Close modal"
                   >
-                    ×
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                   </button>
                 </div>
                 

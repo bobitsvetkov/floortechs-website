@@ -11,7 +11,7 @@ export const services: FlooringService[] = [
         "Customizable finishes and textures",
         "Environmentally friendly options available"
       ],
-      imageUrl: "/api/placeholder/500/300"
+      imageUrl: "/src/assets/showcaseProjectAfter1.jpg"
     },
     {
       id: "inspections",
@@ -24,7 +24,7 @@ export const services: FlooringService[] = [
         "Compliance verification with industry standards",
         "Preventative maintenance planning"
       ],
-      imageUrl: "/api/placeholder/500/300"
+      imageUrl: "/src/assets/showcaseProjectAfter2.jpg"
     },
     {
       id: "rejuvenation",
@@ -37,7 +37,7 @@ export const services: FlooringService[] = [
         "Color restoration and sealing",
         "Same-day completion for most spaces"
       ],
-      imageUrl: "/api/placeholder/500/300"
+      imageUrl: "/src/assets/showcaseProjectAfter3.jpg"
     },
     {
       id: "repairs",
@@ -50,7 +50,7 @@ export const services: FlooringService[] = [
         "Joint sealing and reinforcement",
         "Subfloor issue correction"
       ],
-      imageUrl: "/api/placeholder/500/300"
+      imageUrl: "/src/assets/showcaseProjectAfter3.jpg"
     },
     {
       id: "maintenance",
@@ -63,6 +63,6 @@ export const services: FlooringService[] = [
         "Traffic pattern management solutions",
         "Slip resistance treatment options"
       ],
-      imageUrl: "/api/placeholder/500/300"
+      imageUrl: "/src/assets/showcaseProjectAfter1.jpg"
     }
   ];
