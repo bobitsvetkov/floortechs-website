@@ -70,7 +70,7 @@ const Home: React.FC = () => {
                             Our focus currently lies in commercial flooring installations, where we provide high-quality, durable flooring solutions for a wide range of industries.
                         </motion.p>
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4, duration: 0.8 }}>
-                            <Link to="/Solutions">
+                            <Link to="/Projects">
                                 <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full text-lg focus:outline-none">
                                     View Our Commercial Projects
                                 </button>
@@ -79,36 +79,6 @@ const Home: React.FC = () => {
                     </motion.div>
                 </div>
             </section>
-
-            {/* "Why Choose Us" Section */}
-            <section id="services" className="py-20 bg-gray-50">
-                <div className="max-w-7xl mx-auto px-4">
-                    <h2 className="text-3xl font-bold text-blue-600 mb-8 text-center">
-                        Why Choose Us for Commercial Flooring?
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="p-6 bg-white shadow rounded transition transform hover:-translate-y-1 hover:shadow-lg">
-                            <h3 className="text-xl font-semibold text-blue-600 mb-2">Template Text. Will ask later.</h3>
-                            <p className="text-gray-700">
-                                Template Text. Will ask later.
-                            </p>
-                        </div>
-                        <div className="p-6 bg-white shadow rounded transition transform hover:-translate-y-1 hover:shadow-lg">
-                            <h3 className="text-xl font-semibold text-blue-600 mb-2">Template Text. Will ask later.</h3>
-                            <p className="text-gray-700">
-                                Template Text. Will ask later.
-                            </p>
-                        </div>
-                        <div className="p-6 bg-white shadow rounded transition transform hover:-translate-y-1 hover:shadow-lg">
-                            <h3 className="text-xl font-semibold text-blue-600 mb-2">Template Text. Will ask later.</h3>
-                            <p className="text-gray-700">
-                                Template Text. Will ask later.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <FeaturedProjects />
 
             {/* Scroll Progress Bar */}
