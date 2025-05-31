@@ -10,6 +10,7 @@ const NAVIGATION_ITEMS = [
     { label: 'Services', path: '/services' },
     { label: 'Solutions', path: '/solutions' },
     { label: 'Contact', path: '/contact' },
+    { label: 'About Us', path: '/about' },
 ];
 
 const Navbar: FC = () => {
