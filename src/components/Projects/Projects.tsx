@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Clock } from 'lucide-react';
 import firstProjectAfter from '../../assets/showcaseProjectAfter1.jpg';
 import secondProjectAfter from '../../assets/showcaseProjectAfter2.jpg';
-import thirdProjectAfter from '../../assets/showcaseProjectAfter3.jpg'
+import poolDeck from '../../assets/poolImage.jpg'
 
 const Projects = () => {
     const projects = [
@@ -21,11 +21,11 @@ const Projects = () => {
             image: secondProjectAfter
         },
         {
-            name: 'template',
-            description: 'template',
-            location: 'template',
+            name: 'Pool Deck: Mount Airy Casino Resort',
+            description: 'Double quarts broadcast with polyaspartic top coat',
+            location: 'Mt Pocono, Pa',
             duration: 'template',
-            image: thirdProjectAfter
+            image: poolDeck
         }
     ];
 
