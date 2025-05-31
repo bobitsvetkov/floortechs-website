@@ -27,7 +27,6 @@ const AboutUs: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 pt-20">
-      {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           About FloorTechs
@@ -37,8 +36,6 @@ const AboutUs: React.FC = () => {
           with innovative solutions
         </p>
       </div>
-
-      {/* Company Story */}
       <div className="bg-white rounded-lg shadow-md p-8 mb-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div>
@@ -80,8 +77,6 @@ const AboutUs: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Stats Section */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         {stats.map((stat, index) => (
           <div
@@ -95,8 +90,6 @@ const AboutUs: React.FC = () => {
           </div>
         ))}
       </div>
-
-      {/* Team Highlights */}
       <div className="bg-white rounded-lg shadow-md p-8 mb-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           What Sets Us Apart
