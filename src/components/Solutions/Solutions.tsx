@@ -21,8 +21,8 @@ const Solutions: React.FC = () => {
   };
   
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-gray-50 pt-10">
-      <h1 className="text-4xl font-bold text-gray-800 mb-3 text-center">Comprehensive Flooring Solutions</h1>
+    <div className="max-w-6xl mx-auto p-6 bg-gray-50 pt-20">
+      <h1 className="text-4xl font-bold text-blue-600 mb-6 text-center">Comprehensive Flooring Solutions</h1>
       <p className="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
         Engineered flooring systems designed for specific industry requirements and operational challenges.
       </p>
