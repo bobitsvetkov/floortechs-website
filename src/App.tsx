@@ -9,6 +9,7 @@ const Contact = lazy(() => import('./components/Contact/Contact'));
 const Projects = lazy(() => import('./components/Projects/Projects'));
 const Solutions = lazy(() => import('./components/Solutions/Solutions'));
 const Services = lazy(() => import('./components/Services/Services'));
+const AboutUS = lazy(() => import('./components/About/AboutUs'));
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -46,6 +47,14 @@ const App = () => {
           element={
             <Suspense fallback={<LoadingSpinner size="md" />}>
                 <Contact />
+            </Suspense>
+          } 
+        />
+        <Route 
+          path="/about" 
+          element={
+            <Suspense fallback={<LoadingSpinner size="md" />}>
+                <AboutUS />
             </Suspense>
           } 
         />
