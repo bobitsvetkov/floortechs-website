@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import logo from '../../assets/logo.png'
+import logo from '../../../public/logo.png'
 import type { FC } from 'react';
 
 const NAVIGATION_ITEMS = [
