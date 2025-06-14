@@ -26,8 +26,8 @@ const FeaturedProjects = () => {
             afterImage: secondProjectAfter
         },
         {
-            title: "Template",
-            transformationDetails: "Template text. Will ask later.",
+            title: "Polished Concrete",
+            transformationDetails: "Polished and treated the existing floor to create a seamless, durable, and visually refined look.",
             beforeImage: thirdProjectBefore,
             afterImage: thirdProjectAfter
         }
