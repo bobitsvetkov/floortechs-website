@@ -47,10 +47,7 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
 ));
 
 const Contact = () => {
-    const { credentials, isLoading, error } = useCredentials();
-    console.log('Credentials:', credentials);
-    console.log('Loading:', isLoading);
-    console.log('Error:', error);
+    const { credentials} = useCredentials();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -74,35 +71,35 @@ const Contact = () => {
         setStatus({});
 
         try {
-            if (!window.grecaptcha || !credentials?.recaptchaSiteKey) {
-                throw new Error('reCAPTCHA or credentials not loaded');
-            }
+            // if (!window.grecaptcha || !credentials?.recaptchaSiteKey) {
+            //     throw new Error('reCAPTCHA or credentials not loaded');
+            // }
 
-            const token = await window.grecaptcha.execute(credentials.recaptchaSiteKey, {
-                action: 'submit',
-            });
+            // const token = await window.grecaptcha.execute(credentials.recaptchaSiteKey, {
+            //     action: 'submit',
+            // });
 
-            const verificationResponse = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/verify-captcha`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token }),
-            });
+            // const verificationResponse = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/verify-captcha`, {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ token }),
+            // });
 
-            if (!verificationResponse.ok) {
-                throw new Error('CAPTCHA verification request failed');
-            }
+            // if (!verificationResponse.ok) {
+            //     throw new Error('CAPTCHA verification request failed');
+            // }
 
-            const verificationResult = await verificationResponse.json();
+            // const verificationResult = await verificationResponse.json();
 
-            if (!verificationResult.success) {
-                throw new Error('CAPTCHA verification failed');
-            }
+            // if (!verificationResult.success) {
+            //     throw new Error('CAPTCHA verification failed');
+            // }
 
             await emailjs.send(
-                credentials.emailJsServiceKey || '',
-                credentials.emailJsTemplateKey || '',
+                credentials?.emailJsServiceKey || '',
+                credentials?.emailJsTemplateKey || '',
                 formData,
-                credentials.emailJsPublicKey || ''
+                credentials?.emailJsPublicKey || ''
             );
 
             setStatus({ success: 'Message sent successfully! We\'ll get back to you soon.' });
