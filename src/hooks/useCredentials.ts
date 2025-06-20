@@ -7,24 +7,27 @@ export const useCredentials = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchCredentials = async () => {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/api/credentials`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch credentials');
-                }
-                const data = await response.json();
-                setCredentials(data);
-                setError(null);
-            } catch (error) {
-                setError('Failed to load credentials');
-                console.error('Error fetching credentials:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+        try {
+            const localCredentials: Credentials = {
+                emailJsPublicKey: import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY,
+                emailJsServiceKey: import.meta.env.VITE_EMAIL_JS_SERVICE_KEY,
+                emailJsTemplateKey: import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY,
+                recaptchaSiteKey: import.meta.env.VITE_RECAPTCHA_SITE_KEY,
+                googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+            };
 
-        fetchCredentials();
+            const hasMissing = Object.values(localCredentials).some(v => !v);
+            if (hasMissing) {
+                throw new Error('Missing one or more environment variables');
+            }
+            setCredentials(localCredentials);
+            setError(null);
+        } catch (e) {
+            console.error('Error loading credentials from env:', e);
+            setError('Missing or invalid environment variables');
+        } finally {
+            setIsLoading(false);
+        }
     }, []);
 
     return { credentials, isLoading, error };

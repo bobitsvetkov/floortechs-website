@@ -47,7 +47,10 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
 ));
 
 const Contact = () => {
-    const { credentials } = useCredentials();
+    const { credentials, isLoading, error } = useCredentials();
+    console.log('Credentials:', credentials);
+    console.log('Loading:', isLoading);
+    console.log('Error:', error);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
