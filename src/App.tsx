@@ -4,8 +4,9 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import Footer from './components/Footer/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
+import ContactPage from './components/Contact/Contact';
 
-const Contact = lazy(() => import('./components/Contact/Contact'));
+// const Contact = lazy(() => import('./components/Contact/Contact'));
 const Projects = lazy(() => import('./components/Projects/Projects'));
 const Solutions = lazy(() => import('./components/Solutions/Solutions'));
 const Services = lazy(() => import('./components/Services/Services'));
@@ -46,7 +47,7 @@ const App = () => {
           path="/Contact" 
           element={
             <Suspense fallback={<LoadingSpinner size="md" />}>
-                <Contact />
+                <ContactPage />
             </Suspense>
           } 
         />
