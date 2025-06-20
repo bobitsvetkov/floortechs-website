@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { MapPin, Clock, Phone, Mail} from 'lucide-react';
 import { useState, useCallback, memo } from 'react';
-import emailjs from '@emailjs/browser';
-import { useCredentials } from '../../hooks/useCredentials';
+// import emailjs from '@emailjs/browser';
+// import { useCredentials } from '../../hooks/useCredentials';
 
 interface ContactInfo {
     icon: JSX.Element;
@@ -47,70 +47,65 @@ const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
 ));
 
 const Contact = () => {
-    const { credentials} = useCredentials();
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        message: ''
-    });
-    const [isSending, setIsSending] = useState(false);
-    const [status, setStatus] = useState<{ success?: string; error?: string }>({});
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<{ success?: string; error?: string }>({});
+    const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    []
+  );
 
-    const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    }, []);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSending(true);
+    setStatus({});
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSending(true);
-        setStatus({});
+    try {
+      if (!window.grecaptcha || !RECAPTCHA_SITE_KEY) {
+        throw new Error('reCAPTCHA not available');
+      }
 
-        try {
-            // if (!window.grecaptcha || !credentials?.recaptchaSiteKey) {
-            //     throw new Error('reCAPTCHA or credentials not loaded');
-            // }
+      const token = await window.grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'submit' });
 
-            // const token = await window.grecaptcha.execute(credentials.recaptchaSiteKey, {
-            //     action: 'submit',
-            // });
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, token }),
+      });
 
-            // const verificationResponse = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/verify-captcha`, {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ token }),
-            // });
+      const result = await res.json();
 
-            // if (!verificationResponse.ok) {
-            //     throw new Error('CAPTCHA verification request failed');
-            // }
+      if (!res.ok || !result.success) {
+        throw new Error(result.message || 'Message failed');
+      }
 
-            // const verificationResult = await verificationResponse.json();
-
-            // if (!verificationResult.success) {
-            //     throw new Error('CAPTCHA verification failed');
-            // }
-
-            await emailjs.send(
-                credentials?.emailJsServiceKey || '',
-                credentials?.emailJsTemplateKey || '',
-                formData,
-                credentials?.emailJsPublicKey || ''
-            );
-
-            setStatus({ success: 'Message sent successfully! We\'ll get back to you soon.' });
-            setFormData({ name: '', email: '', phone: '', message: '' });
-        } catch (error) {
-            setStatus({ error: (error as Error).message || 'Failed to send message' });
-            console.error('Form submission error:', error);
-        } finally {
-            setIsSending(false);
-        }
-    };
+      setStatus({ success: 'Message sent successfully!' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch (err: unknown) {
+      console.error(err);
+      let errorMessage = 'Error sending message';
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (typeof err === 'string') {
+        errorMessage = err;
+      }
+      setStatus({ error: errorMessage });
+    } finally {
+      setIsSending(false);
+    }
+  };
 
     return (
         <div className="pt-20 min-h-screen bg-white">
