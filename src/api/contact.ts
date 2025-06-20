@@ -1,7 +1,15 @@
 export default async function handler(req: any, res: any) {
-//   if (req.method !== 'POST') {
-//     return res.status(405).json({ success: false, message: 'Method not allowed' });
-//   }
+
+  if (req.method === "OPTIONS") {
+    res.setHeader("Access-Control-Allow-Origin", "https://floor-techs.com");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    return res.status(200).end();
+  }
+    
+  if (req.method !== 'POST') {
+    return res.status(405).json({ success: false, message: 'Method not allowed' });
+  }
 
   const { name, email, phone, message, token } = req.body;
 
