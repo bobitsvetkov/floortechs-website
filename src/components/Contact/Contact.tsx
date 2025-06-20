@@ -55,7 +55,6 @@ const Contact = () => {
   });
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState<{ success?: string; error?: string }>({});
-    const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
@@ -71,7 +70,8 @@ const Contact = () => {
     e.preventDefault();
     setIsSending(true);
     setStatus({});
-
+    const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+    console.log('RECAPTCHA_SITE_KEY:', RECAPTCHA_SITE_KEY);
     try {
       if (!window.grecaptcha || !RECAPTCHA_SITE_KEY) {
         throw new Error('reCAPTCHA not available');
