@@ -93,17 +93,26 @@ const Contact = () => {
 
     //   const token = await executeRecaptcha("submit");
 
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, token }),
-      });
+      const res = await fetch(
+        "https://portfolio-backend-server.azurewebsites.net/verify-captcha",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        }
+      );
 
-      const result = await res.json();
-      console.log("Contact API response:", result);
-      if (!res.ok || !result.success) {
+      const captchaResult = await res.json();
+
+      if (!captchaResult.success || captchaResult.score < 0.5) {
         setRefreshReCaptcha(!refreshReCaptcha);
-        throw new Error(result.message || "Message failed");
+        throw new Error("reCAPTCHA validation failed");
+      }
+
+      console.log("Contact API response:", captchaResult);
+      if (!res.ok || !captchaResult.success) {
+        setRefreshReCaptcha(!refreshReCaptcha);
+        throw new Error(captchaResult.message || "Message failed");
       }
 
       setStatus({ success: "Message sent successfully!" });
