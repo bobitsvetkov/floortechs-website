@@ -1,12 +1,20 @@
 export default async function handler(req: any, res: any) {
+  const allowedOrigins = [
+    "https://floor-techs.com",
+  ];
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
-    res.setHeader("Access-Control-Allow-Origin", "https://floor-techs.com");
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     return res.status(200).end();
   }
-    
+
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
@@ -22,9 +30,7 @@ export default async function handler(req: any, res: any) {
     if (!secret) {
       return res.status(500).json({ success: false, message: 'reCAPTCHA secret key not configured' });
     }
-    if (!token) {
-      return res.status(400).json({ success: false, message: 'Missing reCAPTCHA token' });
-    }
+
     const response = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -42,17 +48,16 @@ export default async function handler(req: any, res: any) {
     }
 
     const emailRes = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id: process.env.EMAILJS_SERVICE_ID,
-          template_id: process.env.EMAILJS_TEMPLATE_ID,
-          user_id: process.env.EMAILJS_USER_ID,
-          accessToken: process.env.EMAIL_JS_ACCESS_TOKEN,
-          template_params: { name, email, phone, message },
-        }),
-      }
-    );
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service_id: process.env.EMAILJS_SERVICE_ID,
+        template_id: process.env.EMAILJS_TEMPLATE_ID,
+        user_id: process.env.EMAILJS_USER_ID,
+        accessToken: process.env.EMAIL_JS_ACCESS_TOKEN,
+        template_params: { name, email, phone, message },
+      }),
+    });
 
     if (!emailRes.ok) {
       return res.status(500).json({ success: false, message: 'Email sending failed' });
