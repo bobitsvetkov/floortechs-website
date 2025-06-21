@@ -1,37 +1,40 @@
-// DEPRECATED: This hook is no longer in use due to exposing sensitive info to frontend. Might be used in future when I manage to host backend server to handle sensitive data securely.
+import { useState, useEffect } from 'react';
 
+interface Credentials {
+  emailJsPublicKey?: string;
+  emailJsServiceKey?: string;
+  emailJsTemplateKey?: string;
+  recaptchaSiteKey?: string;
+  googleMapsApiKey?: string;
+}
 
-// import { useState, useEffect } from 'react';
-// import type { Credentials } from '../types/types';
+export const useCredentials = () => {
+  const [credentials, setCredentials] = useState<Credentials | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-// export const useCredentials = () => {
-//     const [credentials, setCredentials] = useState<Credentials | null>(null);
-//     const [isLoading, setIsLoading] = useState(true);
-//     const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    const fetchCredentials = async () => {
+      try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/api/credentials`);
+        if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
+        const data: Credentials = await res.json();
 
-//     useEffect(() => {
-//         try {
-//             const localCredentials: Credentials = {
-//                 emailJsPublicKey: import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY,
-//                 emailJsServiceKey: import.meta.env.VITE_EMAIL_JS_SERVICE_KEY,
-//                 emailJsTemplateKey: import.meta.env.VITE_EMAIL_JS_TEMPLATE_KEY,
-//                 recaptchaSiteKey: import.meta.env.VITE_RECAPTCHA_SITE_KEY,
-//                 googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-//             };
+        const hasMissing = Object.values(data).some(v => !v);
+        if (hasMissing) throw new Error('Missing one or more credentials from backend');
 
-//             const hasMissing = Object.values(localCredentials).some(v => !v);
-//             if (hasMissing) {
-//                 throw new Error('Missing one or more environment variables');
-//             }
-//             setCredentials(localCredentials);
-//             setError(null);
-//         } catch (e) {
-//             console.error('Error loading credentials from env:', e);
-//             setError('Missing or invalid environment variables');
-//         } finally {
-//             setIsLoading(false);
-//         }
-//     }, []);
+        setCredentials(data);
+        setError(null);
+      } catch (e: unknown) {
+        console.error('Failed to fetch credentials:', e);
+        setError(e instanceof Error ? e.message : 'Unknown error');
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-//     return { credentials, isLoading, error };
-// };
+    fetchCredentials();
+  }, []);
+
+  return { credentials, isLoading, error };
+};
