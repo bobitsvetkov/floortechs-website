@@ -120,9 +120,9 @@ const Contact = () => {
         credentials?.emailJsServiceKey || "",
         credentials?.emailJsTemplateKey || "",
         {
-          from_name: formData.name,
-          from_email: formData.email,
-          from_phone: formData.phone,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
           message: formData.message,
         },
         credentials?.emailJsPublicKey || ""
