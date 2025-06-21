@@ -6,6 +6,9 @@ import Footer from "./components/Footer/Footer";
 import LoadingSpinner from "./components/LoadingSpinner";
 import useRecaptchaLoader from "./hooks/useRecaptchaLoader";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react"
+
+
 const Contact = lazy(() => import("./components/Contact/Contact"));
 const Projects = lazy(() => import("./components/Projects/Projects"));
 const Solutions = lazy(() => import("./components/Solutions/Solutions"));
@@ -65,6 +68,7 @@ const App = () => {
         <Footer />
       </Router>
       <Analytics />
+      <SpeedInsights />
     </>
   );
 };
