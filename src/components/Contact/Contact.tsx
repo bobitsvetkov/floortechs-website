@@ -1,52 +1,56 @@
-import { motion } from 'framer-motion';
-import { MapPin, Clock, Phone, Mail} from 'lucide-react';
-import { useState, useCallback, memo } from 'react';
-import {GoogleReCaptchaProvider, useGoogleReCaptcha} from "react-google-recaptcha-v3";
-// import emailjs from '@emailjs/browser';
-// import { useCredentials } from '../../hooks/useCredentials';
-
+import { motion } from "framer-motion";
+import { MapPin, Clock, Phone, Mail } from "lucide-react";
+import { useState, useCallback, memo } from "react";
+import {GoogleReCaptchaProvider,useGoogleReCaptcha} from "react-google-recaptcha-v3";
+import { useCredentials } from "../../hooks/useCredentials";
+import emailjs from "@emailjs/browser";
 interface ContactInfo {
-    icon: JSX.Element;
-    text: string;
-    href?: string;
+  icon: JSX.Element;
+  text: string;
+  href?: string;
 }
 
 declare global {
-    interface Window {
-        grecaptcha: {
-            execute: (siteKey: string, options: { action: string }) => Promise<string>;
-            ready: (callback: () => void) => void;
-        };
-    }
+  interface Window {
+    grecaptcha: {
+      execute: (
+        siteKey: string,
+        options: { action: string }
+      ) => Promise<string>;
+      ready: (callback: () => void) => void;
+    };
+  }
 }
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const CONTACT_INFO: ContactInfo[] = [
-    { 
-        icon: <MapPin className="w-6 h-6" />, 
-        text: '326 Penn ave West Reading, Pennsylvania 19611',
-    },
-    { icon: <Clock className="w-6 h-6" />, text: 'Mon - Fri: 9:00 AM - 5:00 PM' },
-    { 
-        icon: <Phone className="w-6 h-6" />, 
-        text: '610-573-9895',
-    },
-    { 
-        icon: <Mail className="w-6 h-6" />, 
-        text: 'ajaber@floor-techs.com',
-    }
+  {
+    icon: <MapPin className="w-6 h-6" />,
+    text: "326 Penn ave West Reading, Pennsylvania 19611",
+  },
+  { icon: <Clock className="w-6 h-6" />, text: "Mon - Fri: 9:00 AM - 5:00 PM" },
+  {
+    icon: <Phone className="w-6 h-6" />,
+    text: "610-573-9895",
+  },
+  {
+    icon: <Mail className="w-6 h-6" />,
+    text: "ajaber@floor-techs.com",
+  },
 ];
 
 const ContactInfoItem = memo(({ info }: { info: ContactInfo }) => (
-    <motion.div
-        whileHover={{ scale: 1.03 }}
-        className="flex items-center space-x-4 p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl 
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    className="flex items-center space-x-4 p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl 
                    border border-blue-100 shadow-sm hover:shadow-md transition-all duration-300"
-    >
-        <span className="text-blue-500 bg-blue-50 p-2 rounded-full">{info.icon}</span>
-        <span className="text-blue-600">{info.text}</span>
-    </motion.div>
+  >
+    <span className="text-blue-500 bg-blue-50 p-2 rounded-full">
+      {info.icon}
+    </span>
+    <span className="text-blue-600">{info.text}</span>
+  </motion.div>
 ));
 
 const Contact = () => {
@@ -56,8 +60,10 @@ const Contact = () => {
     phone: "",
     message: "",
   });
+  const { credentials} = useCredentials();
+
   const [isSending, setIsSending] = useState(false);
-  const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
+
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [status, setStatus] = useState<{ success?: string; error?: string }>(
     {}
@@ -73,7 +79,6 @@ const Contact = () => {
     []
   );
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSending(true);
@@ -83,18 +88,17 @@ const Contact = () => {
       if (!executeRecaptcha) {
         throw new Error("reCAPTCHA not yet available");
       }
-        
+
       const token = await executeRecaptcha("submit");
 
       if (!token) {
         alert("Please complete the reCAPTCHA");
+        setIsSending(false);
         return;
       }
 
-    //   const token = await executeRecaptcha("submit");
-
       const res = await fetch(
-        "https://portfolio-backend-server.azurewebsites.net/verify-captcha",
+        `${import.meta.env.VITE_BACKEND_SERVER}/verify-captcha`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -102,18 +106,27 @@ const Contact = () => {
         }
       );
 
+      if (!res.ok) {
+        throw new Error("Network error verifying reCAPTCHA");
+      }
+
       const captchaResult = await res.json();
 
       if (!captchaResult.success || captchaResult.score < 0.5) {
-        setRefreshReCaptcha(!refreshReCaptcha);
         throw new Error("reCAPTCHA validation failed");
       }
 
-      console.log("Contact API response:", captchaResult);
-      if (!res.ok || !captchaResult.success) {
-        setRefreshReCaptcha(!refreshReCaptcha);
-        throw new Error(captchaResult.message || "Message failed");
-      }
+      await emailjs.send(
+        credentials?.emailJsServiceKey || "",
+        credentials?.emailJsTemplateKey || "",
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          from_phone: formData.phone,
+          message: formData.message,
+        },
+        credentials?.emailJsPublicKey || ""
+      );
 
       setStatus({ success: "Message sent successfully!" });
       setFormData({ name: "", email: "", phone: "", message: "" });
@@ -299,7 +312,7 @@ const Contact = () => {
 };
 
 export default function ContactPage() {
- return (
+  return (
     <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
       <Contact />
     </GoogleReCaptchaProvider>
